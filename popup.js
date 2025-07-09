@@ -27,8 +27,8 @@ fetch(chrome.runtime.getURL('urls.json'))
 			button.innerHTML = `
 				<span class="icon copy-icon">
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 25 25">
-  <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 18H8V7h11v16z"/>
-</svg>
+						<path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 18H8V7h11v16z"/>
+					</svg>
 				</span>
 				<span class="icon check-icon" style="display: none;">
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="currentColor">
@@ -47,11 +47,13 @@ fetch(chrome.runtime.getURL('urls.json'))
 						checkIcon.style.display = 'inline';
 
 						button.classList.add('copied');
+						item.classList.add('copied');
 
 						setTimeout(() => {
 							checkIcon.style.display = 'none';
 							copyIcon.style.display = 'inline';
 							button.classList.remove('copied')
+							item.classList.remove('copied');
 						}, 1200);
 					})
 					.catch(err => console.error('Failed to copy:', err));
