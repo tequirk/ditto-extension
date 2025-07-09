@@ -15,6 +15,18 @@
 	</div>
   <div id="container-wrapper">
     <div id="container"></div>
+    <div id="actions">
+      <button id="manage-btn" class="text-btn">Manage List</button>
+      <!-- <button id="add-btn" class="text-btn">Add Link</button> -->
+    </div>
+    <div id="add-form" style="display: none;">
+      <input type="text" id="new-title" placeholder="Link Title" />
+      <input type="text" id="new-url" placeholder="Link URL" />
+      <div class="add-form-actions">
+        <button id="cancel-add" class="text-btn">Cancel</button>
+        <button id="save-add" class="text-btn">Save</button>
+      </div>
+    </div>
   </div>
   <script src="popup.js"></script>
 	<!-- <div id="footer">

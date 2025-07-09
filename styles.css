@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   /* padding: 10px; */
-  width: 300px;
+  width: 360px;
 	/* height: 400px; */
   background: #e8e5e2;
 }
@@ -13,6 +13,7 @@ body {
   gap: 8px;
 	border-radius: 10px;
 	padding: 10px;
+	padding-bottom: 0;
 	overflow-y: auto;
 	height: calc(100% - 40px); /* Adjust for footer height */
 }
@@ -104,6 +105,121 @@ body {
 	color: #888;
 }
 
+
+.text-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 6px 0;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.text-btn:hover {
+	color: #D2B38C;
+}
+
+#actions {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+	padding: 0 10px;
+}
+
+#add-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#add-form input {
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.add-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+
+.editable-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+	margin: auto 0;
+}
+
+.delete-btn:hover {
+  color: #ff4d4d;
+}
+
+
+
+
+
+
+.item.editable {
+	height: auto;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  background: white;
+  padding: 12px;
+	cursor: grab;
+}
+
+.editable-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editable-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+	width: 100%;
+}
+
+.editable-field label {
+  font-size: 12px;
+  color: #888;
+}
+
+.edit-title,
+.edit-url {
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #edeceb;
+}
+
+
+
+
+
 @media (prefers-color-scheme: dark) {
   body {
 		background: #1e1e1e;
@@ -129,7 +245,22 @@ body {
 	}
 
 	#footer {
-	background: #333333;
-	color: white;
-}
+		background: #333333;
+		color: white;
+	}
+
+	.item.editable {
+		background: #2a2a2a;
+	}
+
+	.editable-field label {
+		color: #bbb;
+	}
+
+	.edit-title,
+	.edit-url {
+		border: 1px solid #555;
+		background: #1f1f1f;
+		color: white;
+	}
 }
