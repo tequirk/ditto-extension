@@ -1,0 +1,123 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  /* padding: 10px; */
+  width: 300px;
+	/* height: 400px; */
+  background: #e8e5e2;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+	border-radius: 10px;
+	padding: 10px;
+	overflow-y: auto;
+	height: calc(100% - 40px); /* Adjust for footer height */
+}
+
+.item {
+	height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+	overflow: hidden;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  flex-grow: 1; /* Pushes button to the edge */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+	/* cursor: pointer; */
+}
+
+.copy-btn {
+  background: #d1cac2;
+  border: none;
+  height: 100%;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.copy-btn:hover {
+  background-color: #dfdad4;
+  /* color: #0084d1; */
+}
+
+.copy-btn.copied {
+  background-color: #D2B38C;
+}
+
+.dragging {
+  opacity: 0.5;
+	cursor: grabbing !important;
+}
+
+#header {
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 12px;
+	color: #888;
+}
+
+#header img {
+	width: 84px;    /* Adjust as needed */
+	height: 54px;   /* Adjust as needed */
+	object-fit: contain; /* Keeps aspect ratio */
+}
+
+#header h4 {
+	margin: 0;
+	font-weight: 500;
+}
+
+#footer {
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #d1cac2;
+	margin-top: 10px;
+	text-align: center;
+	font-size: 12px;
+	color: #888;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  body {
+		background: #1e1e1e;
+    color: #f0f0f0;
+  }
+
+  .item {
+    background: #2b2b2b;
+    border: 1px solid #393939;
+  }
+
+  button {
+    background-color: #0084d1;
+    color: white;
+  }
+
+  button:hover {
+    background-color: #006bb3;
+  }
+} */
