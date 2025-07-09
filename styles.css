@@ -101,7 +101,7 @@ body {
 	color: #888;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   body {
 		background: #1e1e1e;
     color: #f0f0f0;
@@ -112,12 +112,17 @@ body {
     border: 1px solid #393939;
   }
 
-  button {
-    background-color: #0084d1;
-    color: white;
-  }
+  .copy-btn {
+		background: #333333;
+		color: white;
+	}
 
-  button:hover {
-    background-color: #006bb3;
-  }
-} */
+	.copy-btn:hover {
+		background-color: #404040;
+		/* color: #0084d1; */
+	}
+
+	.copy-btn.copied {
+		background-color: #D2B38C;
+	}
+}
