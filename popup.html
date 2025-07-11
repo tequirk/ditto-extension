@@ -9,30 +9,48 @@
 </head>
 
 <body>
-	<div id="header">
-		<img src="logo.png" alt="Diddo Logo" />
-		<h4>Link Manager</h4>
-	</div>
   <div id="container-wrapper">
+		<div id="header">
+			<img src="logo.png" alt="Diddo Logo" />
+			<h4>Link Manager</h4>
+		</div>
     <div id="container"></div>
-    <div id="actions">
-      <button id="manage-btn" class="text-btn">Manage List</button>
-      <!-- <button id="add-btn" class="text-btn">Add Link</button> -->
-    </div>
-    <div id="add-form" style="display: none;">
+    <!-- <div id="actions">
+      <button id="manage-btn" class="text-btn">Edit Links</button>
+    </div> -->
+    <!-- <div id="add-form" style="display: none;">
       <input type="text" id="new-title" placeholder="Link Title" />
       <input type="text" id="new-url" placeholder="Link URL" />
       <div class="add-form-actions">
         <button id="cancel-add" class="text-btn">Cancel</button>
         <button id="save-add" class="text-btn">Save</button>
       </div>
-    </div>
+    </div> -->
   </div>
+	<div id="footer">
+		<button id="manage-btn" class="text-btn">Edit Links</button>
+		<button id="done-btn" style="display: none;">Done</button>
+		<button id="add-link-btn" style="display: none;">+ New Link</button>
+	</div>
+	<div id="modal-overlay" style="display: none;">
+		<div id="add-form">
+			<div class="overlay-item editable">
+				<div class="editable-field">
+					<label>Title</label>
+					<input type="text" class="new-title" placeholder="ex. My Link" />
+				</div>
+				<div class="editable-field">
+					<label>Link URL</label>
+					<input type="text" class="new-url" placeholder="ex. https://www.mylink.com/" />
+				</div>
+			</div>
+      <div class="add-form-actions">
+        <button id="cancel-add">Cancel</button>
+        <button id="save-add">Save</button>
+      </div>
+    </div>
+	</div>
   <script src="popup.js"></script>
-	<!-- <div id="footer">
-		<button id="add-link">Add Link</button>
-		<button id="save-links">Save Links</button>
-	</div> -->
 </body>
 
 </html>

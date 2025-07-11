@@ -5,6 +5,39 @@ body {
   width: 360px;
 	/* height: 400px; */
   background: #e8e5e2;
+	overflow: hidden;
+	display: flex;
+  flex-direction: column;
+}
+
+#header {
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 12px;
+	color: #888;
+	padding: 12px;
+}
+
+#header img {
+	width: 84px;    /* Adjust as needed */
+	height: 54px;   /* Adjust as needed */
+	object-fit: contain; /* Keeps aspect ratio */
+}
+
+#header h4 {
+	margin: 0;
+	font-weight: 500;
+}
+
+#container-wrapper {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	margin-bottom: 40px; /* Adjust for footer height */
 }
 
 #container {
@@ -14,8 +47,8 @@ body {
 	border-radius: 10px;
 	padding: 10px;
 	padding-bottom: 0;
-	overflow-y: auto;
-	height: calc(100% - 40px); /* Adjust for footer height */
+	/* overflow-y: auto; */
+	/* height: calc(100% - 40px); Adjust for footer height */
 }
 
 .item {
@@ -30,7 +63,7 @@ body {
 }
 
 .item.copied {
-	border-color: #D2B38C;
+	border-color: #61af62;
 	/* background-color: #D2B38C; */
 }
 
@@ -64,7 +97,7 @@ body {
 }
 
 .copy-btn.copied {
-  background-color: #D2B38C;
+  background-color: #61af62;
 }
 
 .dragging {
@@ -72,37 +105,127 @@ body {
 	cursor: grabbing !important;
 }
 
-#header {
-	height: 100px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-size: 12px;
-	color: #888;
-}
-
-#header img {
-	width: 84px;    /* Adjust as needed */
-	height: 54px;   /* Adjust as needed */
-	object-fit: contain; /* Keeps aspect ratio */
-}
-
-#header h4 {
-	margin: 0;
-	font-weight: 500;
-}
-
 #footer {
-	height: 50px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #d1cac2;
+	background: #e8e5e2;
 	text-align: center;
 	font-size: 12px;
 	color: #888;
+}
+
+#footer.editing {
+	height: 60px;
+	padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	box-sizing: border-box;
+	border-top: 1px solid #ccc;
+}
+
+#footer #done-btn, #footer #add-link-btn {
+	display: flex;
+	background: #af8c61;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 6px;
+	cursor: pointer;
+	color: white;
+	transition: background-color 0.1s, color 0.1s;
+}
+
+#footer #done-btn {
+	background: #d3d3d3;
+	color: black;
+}
+
+#footer #done-btn:hover, #footer #add-link-btn:hover {
+	filter: brightness(0.9);
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#add-form {
+  display: flex;
+  flex-direction: column;
+	/* padding: 16px; */
+	width: 100%;
+	background: white;
+	border: 1px solid #ccc;
+	margin: 16px;
+	border-radius: 6px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-item {
+	height: auto;
+  display: flex;
+	flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  align-items: stretch;
+  gap: 12px;
+  padding: 20px 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.add-form-actions {
+	height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+	border-top: 1px solid #ccc;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	font-size: 12px;
+	color: #888;
+	padding: 0 12px;
+}
+
+#cancel-add, #save-add {
+	width: 80px;
+	font-size: 14px;
+	/* display: flex; */
+	text-align: center;
+	background: #af8c61;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 6px;
+	cursor: pointer;
+	color: white;
+	transition: background-color 0.1s, color 0.1s;
+}
+
+#cancel-add {
+	background: #edeceb;
+	color: black;
+}
+
+#cancel-add:hover, #save-add:hover {
+	filter: brightness(0.9);
+	/* margin-bottom: 2px; */
 }
 
 
@@ -119,36 +242,6 @@ body {
 .text-btn:hover {
 	color: #D2B38C;
 }
-
-#actions {
-  margin: 8px 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-	padding: 0 10px;
-}
-
-#add-form {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-#add-form input {
-  padding: 6px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.add-form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-
 
 .editable-wrapper {
   display: flex;
@@ -173,11 +266,6 @@ body {
 .delete-btn:hover {
   color: #ff4d4d;
 }
-
-
-
-
-
 
 .item.editable {
 	height: auto;
@@ -208,7 +296,9 @@ body {
 }
 
 .edit-title,
-.edit-url {
+.edit-url,
+.new-title,
+.new-url {
   padding: 6px 8px;
   font-size: 13px;
   border: 1px solid #ccc;
@@ -226,10 +316,28 @@ body {
     color: #f0f0f0;
   }
 
-  .item {
+  .item, #add-form {
     background: #2b2b2b;
-    border: 1px solid #393939;
+    border-color: #393939;
   }
+
+	.add-form-actions {
+		border-color: #444;
+	}
+
+	#footer {
+		background: #1e1e1e;
+		color: white;
+	}
+
+	#footer.editing {
+		border-top: 1px solid #393939;
+	}
+
+	#footer #done-btn, #cancel-add {
+		background: #555;
+		color: white;
+	}
 
   .copy-btn {
 		background: #333333;
@@ -241,12 +349,7 @@ body {
 	}
 
 	.copy-btn.copied {
-		background-color: #D2B38C;
-	}
-
-	#footer {
-		background: #333333;
-		color: white;
+		background-color: #61af62;
 	}
 
 	.item.editable {
@@ -258,9 +361,19 @@ body {
 	}
 
 	.edit-title,
-	.edit-url {
+	.edit-url,
+	.new-title,
+	.new-url {
 		border: 1px solid #555;
 		background: #1f1f1f;
 		color: white;
+	}
+
+	#footer #done-btn:hover, #footer #add-link-btn:hover {
+		filter: brightness(1.1);
+	}
+
+	#cancel-add:hover, #save-add:hover {
+		filter: brightness(1.1);
 	}
 }

@@ -1,5 +1,6 @@
 let sortableInstance = null;
 
+// Load data from storage or fallback to urls.json
 function loadData(callback) {
   chrome.storage.local.get(['urls'], (result) => {
     if (result.urls) {
@@ -13,10 +14,12 @@ function loadData(callback) {
   });
 }
 
+// Save data to storage
 function saveData(data, callback) {
   chrome.storage.local.set({ urls: data }, callback);
 }
 
+// Render the list of URLs
 function renderList(data) {
   const container = document.getElementById('container');
   container.innerHTML = '';
@@ -74,6 +77,7 @@ function renderList(data) {
   });
 }
 
+// Render the editable entries for managing links
 function renderEditableEntries(data) {
   const container = document.getElementById('container');
   container.innerHTML = '';
@@ -86,7 +90,6 @@ function renderEditableEntries(data) {
     const left = document.createElement('div');
     left.className = 'item-left editable-left';
 
-    // -- title input --
     const titleWrapper = document.createElement('div');
     titleWrapper.className = 'editable-field';
     const titleLabel = document.createElement('label');
@@ -98,7 +101,6 @@ function renderEditableEntries(data) {
     titleWrapper.appendChild(titleLabel);
     titleWrapper.appendChild(titleInput);
 
-    // -- url input --
     const urlWrapper = document.createElement('div');
     urlWrapper.className = 'editable-field';
     const urlLabel = document.createElement('label');
@@ -109,191 +111,127 @@ function renderEditableEntries(data) {
     urlInput.className = 'edit-url';
     urlWrapper.appendChild(urlLabel);
     urlWrapper.appendChild(urlInput);
+
     left.appendChild(titleWrapper);
     left.appendChild(urlWrapper);
+
     const contentWrapper = document.createElement('div');
-		contentWrapper.className = 'editable-wrapper';
+    contentWrapper.className = 'editable-wrapper';
+    contentWrapper.appendChild(left);
 
-		contentWrapper.appendChild(left);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.innerHTML = '🗑️';
+    deleteBtn.addEventListener('click', () => {
+      data.splice(index, 1);
+      saveData(data, () => renderEditableEntries(data));
+    });
 
-		// Delete button
-		const deleteBtn = document.createElement('button');
-		deleteBtn.className = 'delete-btn';
-		deleteBtn.innerHTML = '🗑️'; // You can use an SVG if you want
-
-		deleteBtn.addEventListener('click', () => {
-			data.splice(index, 1);
-			saveData(data, () => renderEditableEntries(data));
-		});
-
-		contentWrapper.appendChild(deleteBtn);
-		item.appendChild(contentWrapper);
+    contentWrapper.appendChild(deleteBtn);
+    item.appendChild(contentWrapper);
     container.appendChild(item);
   });
 
-	const addBtn = document.createElement('button');
-  addBtn.textContent = 'Add Link';
-  addBtn.className = 'text-btn';
-  addBtn.style.marginTop = '12px';
-  addBtn.style.alignSelf = 'center';
+  if (sortableInstance) {
+    sortableInstance.destroy();
+  }
 
-  addBtn.addEventListener('click', () => {
-    renderAddForm(data);
-  });
-
-  container.appendChild(addBtn);
-
-	if (sortableInstance) {
-		sortableInstance.destroy();
-	}
-
-	sortableInstance = new Sortable(container, {
-		animation: 150,
-		ghostClass: 'dragging',
-	});
-
-  // 🧲 Enable drag-and-drop only in edit mode
-  new Sortable(container, {
+  sortableInstance = new Sortable(container, {
     animation: 150,
     ghostClass: 'dragging',
   });
 }
 
-// function setupAddForm(data) {
-//   const addForm = document.getElementById('add-form');
-//   const titleInput = document.getElementById('new-title');
-//   const urlInput = document.getElementById('new-url');
-//   const saveBtn = document.getElementById('save-add');
-//   const cancelBtn = document.getElementById('cancel-add');
-
-//   cancelBtn.addEventListener('click', () => {
-//     addForm.style.display = 'none';
-//     titleInput.value = '';
-//     urlInput.value = '';
-//   });
-
-//   saveBtn.addEventListener('click', () => {
-//     const title = titleInput.value.trim();
-//     const url = urlInput.value.trim();
-//     if (!title || !url) return;
-
-//     const newData = [...data, { label: title, url }];
-//     saveData(newData, () => {
-//       addForm.style.display = 'none';
-//       titleInput.value = '';
-//       urlInput.value = '';
-//       renderList(newData);
-//     });
-//   });
-// }
-
+// Render the modal for adding a new link
 function renderAddForm(data) {
-  const container = document.getElementById('container');
-
-  const form = document.createElement('div');
-  form.className = 'add-form';
-
-  const titleWrapper = document.createElement('div');
-  titleWrapper.className = 'editable-field';
-  const titleLabel = document.createElement('label');
-  titleLabel.textContent = 'Link Title';
-  const titleInput = document.createElement('input');
-  titleInput.type = 'text';
-  titleInput.className = 'edit-title';
-  titleWrapper.appendChild(titleLabel);
-  titleWrapper.appendChild(titleInput);
-
-  const urlWrapper = document.createElement('div');
-  urlWrapper.className = 'editable-field';
-  const urlLabel = document.createElement('label');
-  urlLabel.textContent = 'Link URL';
-  const urlInput = document.createElement('input');
-  urlInput.type = 'text';
-  urlInput.className = 'edit-url';
-  urlWrapper.appendChild(urlLabel);
-  urlWrapper.appendChild(urlInput);
-
-  const actions = document.createElement('div');
-  actions.style.display = 'flex';
-  actions.style.gap = '8px';
-
-  const saveBtn = document.createElement('button');
-  saveBtn.textContent = 'Save';
-  saveBtn.className = 'text-btn';
-  const cancelBtn = document.createElement('button');
-  cancelBtn.textContent = 'Cancel';
-  cancelBtn.className = 'text-btn';
-
-  cancelBtn.addEventListener('click', () => form.remove());
-
-  saveBtn.addEventListener('click', () => {
-    const label = titleInput.value.trim();
-    const url = urlInput.value.trim();
-    if (!label || !url) return;
-
-    const updated = [...data, { label, url }];
-    saveData(updated, () => renderEditableEntries(updated));
-  });
-
-  actions.appendChild(saveBtn);
-  actions.appendChild(cancelBtn);
-
-  form.appendChild(titleWrapper);
-  form.appendChild(urlWrapper);
-  form.appendChild(actions);
-
-  container.appendChild(form);
+	const overlay = document.getElementById('modal-overlay');
+	overlay.style.display = 'flex';
 }
 
+let isManaging = false;
+let isAdding = false;
+
+// Load initial data and set up event listeners
 loadData((data) => {
   renderList(data);
 
-  let isManaging = false;
-  let isAdding = false;
+	const footer = document.getElementById('footer');
+	const containerWrapper = document.getElementById('container-wrapper');
+	const manageBtn = document.getElementById('manage-btn');
+	const doneBtn = document.getElementById('done-btn');
+	const addLinkBtn = document.getElementById('add-link-btn');
+	const modalCancelBtn = document.getElementById('cancel-add');
+	const modalSaveBtn = document.getElementById('save-add');
 
-  const manageBtn = document.getElementById('manage-btn');
-  const addBtn = document.getElementById('add-btn');
-  const addForm = document.getElementById('add-form');
-
+	// Add Manage button functionality
   manageBtn.addEventListener('click', () => {
-    if (isManaging) {
-			const edited = [];
-			const items = document.querySelectorAll('#container .item');
+		isManaging = true;
+		renderEditableEntries(data);
+		footer.classList.add('editing');
+		manageBtn.style.display = 'none';
+		doneBtn.style.display = 'flex';
+		addLinkBtn.style.display = 'flex';
+		containerWrapper.style.marginBottom = '70px'; // Adjust for footer height
+		if (sortableInstance) {
+			sortableInstance.destroy();
+			sortableInstance = null;
+		}
+  });
 
-			items.forEach(item => {
-				const label = item.querySelector('.edit-title').value.trim();
-				const url = item.querySelector('.edit-url').value.trim();
-				if (label && url) {
-					edited.push({ label, url });
-				}
-			});
+	// Add Done button functionality
+	doneBtn.addEventListener('click', () => {
+		const edited = [];
+		const items = document.querySelectorAll('#container .item');
 
-			saveData(edited, () => {
-				isManaging = false;
-				manageBtn.textContent = 'Manage List';
-				renderList(edited);
-			});
-
-			if (sortableInstance) {
-				sortableInstance.destroy();
-				sortableInstance = null;
+		items.forEach(item => {
+			const label = item.querySelector('.edit-title').value.trim();
+			const url = item.querySelector('.edit-url').value.trim();
+			if (label && url) {
+				edited.push({ label, url });
 			}
-		} else {
-      isManaging = true;
-      isAdding = false;
-      addForm.style.display = 'none';
-      manageBtn.textContent = 'Done';
-      renderEditableEntries(data);
-    }
-  });
+		});
 
-  addBtn.addEventListener('click', () => {
-    isAdding = !isAdding;
-    isManaging = false;
-    manageBtn.textContent = 'Manage List';
-    renderList(data);
-    addForm.style.display = isAdding ? 'flex' : 'none';
-  });
+		saveData(edited, () => {
+        isManaging = false;
+        renderList(edited);
+        if (sortableInstance) {
+          sortableInstance.destroy();
+          sortableInstance = null;
+        }
+        footer.classList.remove('editing');
+				manageBtn.style.display = 'flex';
+				doneBtn.style.display = 'none';
+				addLinkBtn.style.display = 'none';
+				containerWrapper.style.marginBottom = '40px'; // Adjust for footer height
+      });
+	});
 
-  setupAddForm(data);
+	// Add Add button functionality
+	addLinkBtn.addEventListener('click', () => {
+		isAdding = true;
+		renderAddForm();
+	});
+
+	// Add Cancel button functionality in modal
+	modalCancelBtn.addEventListener('click', () => {
+		isAdding = false;
+		document.getElementById('modal-overlay').style.display = 'none';
+	});
+
+	// Add Save button functionality in modal
+	modalSaveBtn.addEventListener('click', () => {
+		const titleInput = document.querySelector('.new-title');
+		const urlInput = document.querySelector('.new-url');
+		const label = titleInput.value.trim();
+		const url = urlInput.value.trim();
+
+		if (!label || !url) return;
+
+		const updated = [...data, { label, url }];
+		saveData(updated, () => {
+			isAdding = false;
+			document.getElementById('modal-overlay').style.display = 'none';
+			renderEditableEntries(updated);
+		});
+	});
 });
