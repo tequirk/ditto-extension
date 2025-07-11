@@ -163,6 +163,8 @@ loadData((data) => {
 	const modalCancelBtn = document.getElementById('cancel-add');
 	const modalSaveBtn = document.getElementById('save-add');
 
+	let validationMessage = '';
+
 	// Add Manage button functionality
   manageBtn.addEventListener('click', () => {
 		isManaging = true;
@@ -211,22 +213,50 @@ loadData((data) => {
 	addLinkBtn.addEventListener('click', () => {
 		isAdding = true;
 		renderAddForm();
+		document.querySelector('.new-title').focus();
 	});
 
 	// Add Cancel button functionality in modal
 	modalCancelBtn.addEventListener('click', () => {
 		isAdding = false;
 		document.getElementById('modal-overlay').style.display = 'none';
+		document.querySelector('.new-title').classList.remove('error');
+		document.querySelector('.new-url').classList.remove('error');
+		document.querySelector('.error-message').textContent = '';
+		document.querySelector('.error-message').style.display = 'none';
+		validationMessage = '';
+		document.querySelector('.new-title').value = '';
+		document.querySelector('.new-url').value = '';
 	});
 
 	// Add Save button functionality in modal
 	modalSaveBtn.addEventListener('click', () => {
 		const titleInput = document.querySelector('.new-title');
 		const urlInput = document.querySelector('.new-url');
+		const validationBar = document.querySelector('.error-message');
 		const label = titleInput.value.trim();
 		const url = urlInput.value.trim();
 
-		if (!label || !url) return;
+		if (!label) {
+			validationMessage = 'A link title is required.';
+			titleInput.classList.add('error');
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			titleInput.focus();
+			return;
+		} else if (!url) {
+			titleInput.classList.remove('error');
+			validationMessage = 'A link URL is required.';
+			urlInput.classList.add('error');
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			urlInput.focus();
+			return;
+		} else {
+			urlInput.classList.remove('error');
+			validationMessage = '';
+			validationBar.style.display = 'none';
+		}
 
 		const updated = [...data, { label, url }];
 		saveData(updated, () => {

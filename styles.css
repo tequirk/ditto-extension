@@ -306,7 +306,20 @@ body {
   background: #edeceb;
 }
 
+.error-message {
+	width: 100%;
+	background-color: #eb3d3d;
+	color: white;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 12px;
+	margin: 0;
+	box-sizing: border-box;
+}
 
+.error {
+	border-color: #eb3d3d !important;
+}
 
 
 
