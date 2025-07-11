@@ -244,17 +244,37 @@ loadData((data) => {
   });
 
 	// Add Done button functionality
-	doneBtn.addEventListener('click', () => {
-		const edited = [];
-		const items = document.querySelectorAll('#container .item');
+  doneBtn.addEventListener('click', () => {
+	const edited = [];
+	const items = document.querySelectorAll('#container .item');
+	let hasError = false;
 
-		items.forEach(item => {
-			const label = item.querySelector('.edit-title').value.trim();
-			const url = item.querySelector('.edit-url').value.trim();
-			if (label && url) {
-				edited.push({ label, url });
-			}
-		});
+	items.forEach(item => {
+	  const label = item.querySelector('.edit-title').value.trim();
+	  const url = item.querySelector('.edit-url').value.trim();
+	  const validationBar = item.querySelector('.error-message');
+	  // Trigger validation for each item
+	  if (item.querySelector('.edit-title')) {
+		item.querySelector('.edit-title').dispatchEvent(new Event('input'));
+	  }
+	  if (item.querySelector('.edit-url')) {
+		item.querySelector('.edit-url').dispatchEvent(new Event('input'));
+	  }
+	  // If error message is visible, block saving
+	  if (validationBar && validationBar.style.display !== 'none' && validationBar.textContent) {
+		hasError = true;
+		validationBar.style.display = 'flex';
+	  }
+	  if (label && url) {
+		edited.push({ label, url });
+	  }
+	});
+
+	if (hasError) {
+	  // Optionally, you can show a general message or highlight errors
+	  // For now, just block saving
+	  return;
+	}
 
 		saveData(edited, () => {
 			data = edited;
