@@ -84,6 +84,7 @@ function renderList(data) {
 // Render the editable entries for managing links
 function renderEditableEntries(data) {
   const container = document.getElementById('container');
+	const addLinkBtn = document.getElementById('add-link-btn');
   container.innerHTML = '';
 
   data.forEach((entry, index) => {
@@ -129,6 +130,9 @@ function renderEditableEntries(data) {
     deleteBtn.addEventListener('click', () => {
       data.splice(index, 1);
       saveData(data, () => renderEditableEntries(data));
+			addLinkBtn.disabled = false;
+			addLinkBtn.classList.remove('disabled');
+		addLinkBtn.textContent = '+ New Link';
     });
 
     contentWrapper.appendChild(deleteBtn);
@@ -144,6 +148,13 @@ function renderEditableEntries(data) {
     animation: 150,
     ghostClass: 'dragging',
   });
+
+	// Disable add link button if maximum entries reached
+	if (data.length >= 6) {
+		addLinkBtn.disabled = true;
+		addLinkBtn.classList.add('disabled');
+		addLinkBtn.textContent = 'Max 6 links reached';
+	}
 }
 
 // Render the modal for adding a new link
@@ -277,9 +288,14 @@ loadData((data) => {
 
 		const updated = [...data, { label, url }];
 		saveData(updated, () => {
+			data = updated;
 			isAdding = false;
 			document.getElementById('modal-overlay').style.display = 'none';
-			renderEditableEntries(updated);
+			renderEditableEntries(data);
 		});
+
+		titleInput.value = '';
+		urlInput.value = '';
+		validationBar.textContent = '';
 	});
 });
