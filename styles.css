@@ -1,9 +1,7 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  /* padding: 10px; */
   width: 360px;
-	/* height: 400px; */
   background: #e8e5e2;
 	overflow: hidden;
 	display: flex;
@@ -47,8 +45,6 @@ body {
 	border-radius: 10px;
 	padding: 10px;
 	padding-bottom: 0;
-	/* overflow-y: auto; */
-	/* height: calc(100% - 40px); Adjust for footer height */
 }
 
 .item {
@@ -64,7 +60,6 @@ body {
 
 .item.copied {
 	border-color: #61af62;
-	/* background-color: #D2B38C; */
 }
 
 .item-left {
@@ -76,7 +71,6 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-	/* cursor: default; */
 }
 
 .copy-btn {
@@ -187,7 +181,6 @@ body {
   display: flex;
 	flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
   align-items: stretch;
   gap: 12px;
   padding: 20px 22px;
@@ -213,7 +206,6 @@ body {
 #cancel-add, #save-add {
 	width: 80px;
 	font-size: 14px;
-	/* display: flex; */
 	text-align: center;
 	background: #af8c61;
 	border: none;
@@ -231,7 +223,6 @@ body {
 
 #cancel-add:hover, #save-add:hover {
 	filter: brightness(0.9);
-	/* margin-bottom: 2px; */
 }
 
 
