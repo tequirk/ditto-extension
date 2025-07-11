@@ -174,10 +174,6 @@ loadData((data) => {
 		doneBtn.style.display = 'flex';
 		addLinkBtn.style.display = 'flex';
 		containerWrapper.style.marginBottom = '70px'; // Adjust for footer height
-		if (sortableInstance) {
-			sortableInstance.destroy();
-			sortableInstance = null;
-		}
   });
 
 	// Add Done button functionality
