@@ -33,7 +33,11 @@ function renderList(data) {
     left.className = 'item-left';
 
     const favicon = document.createElement('img');
-    favicon.src = `https://www.google.com/s2/favicons?domain=${new URL(entry.url).hostname}`;
+		try {
+    	favicon.src = `https://www.google.com/s2/favicons?domain=${new URL(entry.url).hostname}`;
+		} catch (e) {
+			favicon.src = 'https://www.google.com/s2/favicons?domain=example.com'; // Fallback favicon
+		}
     favicon.width = 16;
     favicon.height = 16;
 
