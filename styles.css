@@ -16,7 +16,7 @@ body {
 	align-items: center;
 	text-align: center;
 	font-size: 12px;
-	color: #888;
+	color: #adadad;
 	padding: 12px;
 }
 
@@ -29,6 +29,16 @@ body {
 #header h4 {
 	margin: 0;
 	font-weight: 500;
+}
+#header a {
+	color: #868686;
+	text-decoration: none;
+	font-size: 12px;
+	margin-top: 4px;
+	text-decoration: underline;
+}
+#header a:hover {
+	color: #d2b38c;
 }
 
 #container-wrapper {
