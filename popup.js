@@ -248,6 +248,23 @@ loadData((data) => {
 			validationBar.style.display = 'flex';
 			urlInput.focus();
 			return;
+		} else if (data.some(entry => entry.label === label || entry.url === url)) {
+			titleInput.classList.add('error');
+			urlInput.classList.add('error');
+			validationMessage = 'A link with this title or URL already exists.';
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			titleInput.focus();
+			return;
+		} else if (!/^https?:\/\//i.test(url)) {
+			titleInput.classList.remove('error');
+			urlInput.classList.add('error');
+			validationMessage = 'URL must start with http:// or https://';
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			urlInput.focus();
+			return;
+		
 		} else {
 			urlInput.classList.remove('error');
 			validationMessage = '';
