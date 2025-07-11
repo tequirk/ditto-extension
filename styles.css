@@ -312,7 +312,7 @@ body {
   background: #edeceb;
 }
 
-.error-message {
+.error-message, .new-error-message {
 	width: 100%;
 	background-color: #eb3d3d;
 	color: white;

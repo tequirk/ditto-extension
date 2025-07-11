@@ -316,7 +316,7 @@ loadData((data) => {
 	modalSaveBtn.addEventListener('click', () => {
 		const titleInput = document.querySelector('.new-title');
 		const urlInput = document.querySelector('.new-url');
-		const validationBar = document.querySelector('.error-message');
+		const validationBar = document.querySelector('.new-error-message');
 		const label = titleInput.value.trim();
 		const url = urlInput.value.trim();
 
