@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Diddo - Link Manager",
+  "name": "Ditto - Link Manager",
   "version": "1.0",
   "description": "Quickly copy pre-saved URLs from a dropdown popup.",
   "action": {
