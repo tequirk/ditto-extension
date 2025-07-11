@@ -192,18 +192,19 @@ loadData((data) => {
 		});
 
 		saveData(edited, () => {
-        isManaging = false;
-        renderList(edited);
-        if (sortableInstance) {
-          sortableInstance.destroy();
-          sortableInstance = null;
-        }
-        footer.classList.remove('editing');
-				manageBtn.style.display = 'flex';
-				doneBtn.style.display = 'none';
-				addLinkBtn.style.display = 'none';
-				containerWrapper.style.marginBottom = '40px'; // Adjust for footer height
-      });
+			data = edited;
+			isManaging = false;
+			renderList(data);
+			if (sortableInstance) {
+				sortableInstance.destroy();
+				sortableInstance = null;
+			}
+			footer.classList.remove('editing');
+			manageBtn.style.display = 'flex';
+			doneBtn.style.display = 'none';
+			addLinkBtn.style.display = 'none';
+			containerWrapper.style.marginBottom = '40px'; // Adjust for footer height
+		});
 	});
 
 	// Add Add button functionality
