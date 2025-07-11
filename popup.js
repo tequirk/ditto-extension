@@ -91,6 +91,7 @@ function renderEditableEntries(data) {
     const item = document.createElement('div');
     item.className = 'item editable';
     item.dataset.index = index;
+		let validationMessage = '';
 
     const left = document.createElement('div');
     left.className = 'item-left editable-left';
@@ -117,8 +118,14 @@ function renderEditableEntries(data) {
     urlWrapper.appendChild(urlLabel);
     urlWrapper.appendChild(urlInput);
 
-    left.appendChild(titleWrapper);
-    left.appendChild(urlWrapper);
+		// Create per-item error message bar
+		const validationBar = document.createElement('p');
+		validationBar.className = 'error-message';
+		validationBar.style.display = 'none';
+		left.appendChild(validationBar);
+
+		left.appendChild(titleWrapper);
+		left.appendChild(urlWrapper);
 
     const contentWrapper = document.createElement('div');
     contentWrapper.className = 'editable-wrapper';
@@ -135,9 +142,54 @@ function renderEditableEntries(data) {
 		addLinkBtn.textContent = '+ New Link';
     });
 
-    contentWrapper.appendChild(deleteBtn);
-    item.appendChild(contentWrapper);
-    container.appendChild(item);
+	contentWrapper.appendChild(deleteBtn);
+	item.appendChild(contentWrapper);
+	container.appendChild(item);
+
+	// Validation logic for each item
+	function validateFields() {
+	  const label = titleInput.value.trim();
+	  const url = urlInput.value.trim();
+	  if (!label) {
+			validationMessage = 'A link title is required.';
+			titleInput.classList.add('error');
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			return false;
+	  } else if (!url) {
+			titleInput.classList.remove('error');
+			urlInput.classList.add('error');
+			validationMessage = 'A link URL is required.';
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			return false;
+	  } else if (data.some((entry, i) => i !== index && (entry.label === label || entry.url === url))) {
+			titleInput.classList.add('error');
+			urlInput.classList.add('error');
+			validationMessage = 'A link with this title or URL already exists.';
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			titleInput.focus();
+			return;
+		} else if (!/^https?:\/\//i.test(url)) {
+			titleInput.classList.remove('error');
+			urlInput.classList.add('error');
+			validationMessage = 'URL must start with http:// or https://';
+			validationBar.textContent = validationMessage;
+			validationBar.style.display = 'flex';
+			return false;
+	  } else {
+			titleInput.classList.remove('error');
+			urlInput.classList.remove('error');
+			validationBar.textContent = '';
+			validationBar.style.display = 'none';
+			return true;
+	  }
+	}
+
+	titleInput.addEventListener('input', validateFields);
+	urlInput.addEventListener('input', validateFields);
+
   });
 
   if (sortableInstance) {
@@ -279,7 +331,6 @@ loadData((data) => {
 			validationBar.style.display = 'flex';
 			urlInput.focus();
 			return;
-		
 		} else {
 			urlInput.classList.remove('error');
 			validationMessage = '';
