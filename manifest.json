@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ditto - Link Manager",
+  "name": "Ditto",
   "version": "1.0",
-  "description": "Quickly copy pre-saved URLs from a dropdown popup.",
+  "description": "Save and organize important URLs for fast access.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
