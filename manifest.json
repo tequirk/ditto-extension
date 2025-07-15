@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Ditto",
   "version": "1.0",
-  "description": "Save and organize important URLs for fast access.",
+  "description": "Quickly copy, edit, and manage your favorite URLs.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
