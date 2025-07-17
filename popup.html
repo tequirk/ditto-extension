@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ditto</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="sortable.min.js"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<title>Ditto</title>
-	<link rel="stylesheet" href="styles.css" />
-	<script src="sortable.min.js"></script>
-</head>
-
-<body>
-  <div id="container-wrapper">
-		<div id="header">
-			<img src="logo.png" alt="Ditto Logo" />
-			<h4>All of your most-used links at-the-ready, in one place.</h4>
-			<a href="https://buymeacoffee.com/natebenson" target="_blank">Buy me a ☕️?</a>
-		</div>
-    <div id="container"></div>
-  </div>
-	<div id="footer">
-		<button id="manage-btn" class="text-btn">Edit Links</button>
-		<button id="done-btn" style="display: none;">Done</button>
-		<button id="add-link-btn" style="display: none;">+ New Link</button>
-	</div>
-	<div id="modal-overlay" style="display: none;">
-		<div id="add-form">
-			<div class="overlay-item editable">
-				<p class="new-error-message" style="display: none;"></p>
-				<div class="editable-field">
-					<label>Title</label>
-					<input type="text" class="new-title" placeholder="ex. My Link" />
-				</div>
-				<div class="editable-field">
-					<label>Link URL</label>
-					<input type="text" class="new-url" placeholder="ex. https://www.mylink.com/" />
-				</div>
-			</div>
-      <div class="add-form-actions">
-        <button id="cancel-add">Cancel</button>
-        <button id="save-add">Save</button>
+  <body>
+    <div id="container-wrapper">
+      <div id="header">
+        <img src="logo.png" alt="Ditto Logo" />
+        <h4>All of your most-used links at-the-ready, in one place.</h4>
+        <a href="https://buymeacoffee.com/natebenson" target="_blank"
+          >Buy me a ☕️?</a
+        >
+      </div>
+      <div id="container"></div>
+      <div id="splash-screen" style="display: none">
+        <img
+          src="splash-light.svg"
+          alt="Empty state illustration"
+          class="splash-image"
+        />
+        <p class="splash-text">Click "+ New Link" to add your first link!</p>
       </div>
     </div>
-	</div>
-  <script src="popup.js"></script>
-</body>
-
+    <div id="footer">
+      <button id="manage-btn" class="text-btn">Edit Links</button>
+      <button id="done-btn" style="display: none">Done</button>
+      <button id="add-link-btn" style="display: none">+ New Link</button>
+    </div>
+    <div id="modal-overlay" style="display: none">
+      <div id="add-form">
+        <div class="overlay-item editable">
+          <p class="new-error-message" style="display: none"></p>
+          <div class="editable-field">
+            <label>Title</label>
+            <input type="text" class="new-title" placeholder="ex. My Link" />
+          </div>
+          <div class="editable-field">
+            <label>Link URL</label>
+            <input
+              type="text"
+              class="new-url"
+              placeholder="ex. https://www.mylink.com/"
+            />
+          </div>
+        </div>
+        <div class="add-form-actions">
+          <button id="cancel-add">Cancel</button>
+          <button id="save-add">Save</button>
+        </div>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
 </html>
