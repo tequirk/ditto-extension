@@ -14,9 +14,9 @@ For a better experience, while using the Extension, the Service Provider may req
 
 **Third Party Access**
 
-Please note that the Extension utilizes third-party services:
+Please note that the Extension is published via third-party services:
 
-- [Sortable](https://github.com/SortableJS/Sortable)
+- [Google Chrome Web Store](https://chromewebstore.google.com/)
 
 The Service Provider may disclose User Provided and Automatically Collected Information:
 
