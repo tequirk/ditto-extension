@@ -23,17 +23,20 @@ function saveData(data, callback) {
 function renderList(data) {
   const container = document.getElementById("container");
   const splashScreen = document.getElementById("splash-screen");
+  const footer = document.getElementById("footer");
   const manageBtn = document.getElementById("manage-btn");
   container.innerHTML = "";
 
   if (data.length === 0) {
     container.style.display = "none";
     splashScreen.style.display = "flex";
+    footer.classList.add("unpopulated");
     // Show "+ New Link" button when no links exist
     manageBtn.textContent = "+ New Link";
     manageBtn.classList.add("new-link-style");
     return;
-  }
+  } else {
+    footer.classList.remove("unpopulated");}
 
   container.style.display = "flex";
   splashScreen.style.display = "none";
