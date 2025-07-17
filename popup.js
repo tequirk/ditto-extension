@@ -24,6 +24,8 @@ function renderList(data) {
   const container = document.getElementById("container");
   const splashScreen = document.getElementById("splash-screen");
   const footer = document.getElementById("footer");
+  const splashText = document.getElementById("splash-text");
+  const splashArrow = document.getElementById("splash-arrow");
   const manageBtn = document.getElementById("manage-btn");
   container.innerHTML = "";
 
@@ -32,11 +34,16 @@ function renderList(data) {
     splashScreen.style.display = "flex";
     footer.classList.add("unpopulated");
     // Show "+ New Link" button when no links exist
+    splashText.style.display = "flex";
+    splashArrow.style.display = "flex";
     manageBtn.textContent = "+ New Link";
     manageBtn.classList.add("new-link-style");
     return;
   } else {
-    footer.classList.remove("unpopulated");}
+    footer.classList.remove("unpopulated");
+    splashText.style.display = "none";
+    splashArrow.style.display = "none";
+  }
 
   container.style.display = "flex";
   splashScreen.style.display = "none";

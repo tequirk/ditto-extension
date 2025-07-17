@@ -72,10 +72,16 @@ body {
 	margin-bottom: 26px;
 }
 
-.splash-text {
-  color: #888;
-  font-size: 14px;
-  margin: 0;
+#splash-text {
+	font-size: 18px;
+	color: #7f7f7f;
+}
+
+#splash-arrow {
+	width: 100px;
+	height: auto;
+	opacity: 0.3;
+	filter: invert(0.8);
 }
 
 .item {
@@ -392,9 +398,14 @@ body {
     content: url("splash-dark.svg");
   }
 
-  .splash-text {
+  #splash-text {
     color: #bbb;
   }
+
+	#splash-arrow {
+		opacity: 0.5;
+		filter: none;
+	}
 
   .item,
   #add-form {
