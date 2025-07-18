@@ -365,13 +365,28 @@ loadData((data) => {
   modalCancelBtn.addEventListener("click", () => {
     isAdding = false;
     document.getElementById("modal-overlay").style.display = "none";
-    document.querySelector(".new-title").classList.remove("error");
-    document.querySelector(".new-url").classList.remove("error");
-    document.querySelector(".error-message").textContent = "";
-    document.querySelector(".error-message").style.display = "none";
+
+    // Clear input fields
+    const titleInput = document.querySelector(".new-title");
+    const urlInput = document.querySelector(".new-url");
+    const validationBar = document.querySelector(".new-error-message");
+
+    // Remove error styles
+    titleInput.classList.remove("error");
+    urlInput.classList.remove("error");
+
+    // Clear validation message
+    if (validationBar) {
+      validationBar.textContent = "";
+      validationBar.style.display = "none";
+    }
+
+    // Clear field values
+    titleInput.value = "";
+    urlInput.value = "";
+
+    // Reset validation message variable
     validationMessage = "";
-    document.querySelector(".new-title").value = "";
-    document.querySelector(".new-url").value = "";
   });
 
   // Add Save button functionality in modal
@@ -426,7 +441,7 @@ loadData((data) => {
       data = updated;
       isAdding = false;
       document.getElementById("modal-overlay").style.display = "none";
-      
+
       // If we were in empty state (adding first link), go back to list view
       if (data.length === 1 && !isManaging) {
         renderList(data);
