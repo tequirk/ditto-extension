@@ -1,0 +1,17 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.eol": "\n",
+  "editor.formatOnSave": false,
+  "eslint.format.enable": true,
+  "eslint.validate": ["vue", "html", "javascript", "typescript"],
+  "eslint.options": {
+      "extensions": [".html",".js",".vue",".jsx",".ts"]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+}
