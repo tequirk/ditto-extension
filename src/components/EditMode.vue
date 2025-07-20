@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
-import type { Link } from '../types'
+import { ref } from 'vue'
+
 import { UI_TEXT } from '../constants'
+import type { Link } from '../types'
 import DeleteButton from './ui/DeleteButton.vue'
-import SecondaryButton from './ui/SecondaryButton.vue'
-import PrimaryButton from './ui/PrimaryButton.vue'
-import FormField from './ui/FormField.vue'
 import ErrorMessage from './ui/ErrorMessage.vue'
+import FormField from './ui/FormField.vue'
+import PrimaryButton from './ui/PrimaryButton.vue'
+import SecondaryButton from './ui/SecondaryButton.vue'
 
 interface Props {
   links: Link[]
@@ -30,9 +31,9 @@ const sortableContainer = ref<HTMLElement>()
 // Setup sortable functionality
 useSortable(sortableContainer, props.links, {
   animation: 200,
-  ghostClass: 'sortable-ghost',
   chosenClass: 'sortable-chosen',
   dragClass: 'sortable-drag',
+  ghostClass: 'sortable-ghost',
   onUpdate: (e: { oldIndex?: number; newIndex?: number }) => {
     // Create new array with reordered items
     if (e.oldIndex !== undefined && e.newIndex !== undefined) {
@@ -41,7 +42,7 @@ useSortable(sortableContainer, props.links, {
       newOrder.splice(e.newIndex, 0, removed)
       emit('reorder', newOrder)
     }
-  }
+  },
 })
 
 function handleDelete(index: number) {
@@ -64,10 +65,7 @@ function handleAddLink() {
 <template>
   <div class="flex flex-col flex-1">
     <!-- Edit Mode -->
-    <div 
-      ref="sortableContainer"
-      class="flex flex-col overflow-y-auto max-h-[300px] px-3 mb-[72px]"
-    >
+    <div ref="sortableContainer" class="flex flex-col overflow-y-auto max-h-[300px] px-3 mb-[72px]">
       <div
         v-for="(link, index) in links"
         :key="`${link.label}-${link.url}-${index}`"
@@ -75,18 +73,15 @@ function handleAddLink() {
       >
         <div class="flex w-full items-start gap-3">
           <div class="flex-1">
-            <ErrorMessage 
-              :show="!!link.error"
-              :message="link.error"
-            />
-            
+            <ErrorMessage :show="!!link.error" :message="link.error" />
+
             <FormField
               v-model="link.label"
               :label="UI_TEXT.TITLE_LABEL"
               :has-error="link.hasError"
               @input="handleValidate(link, index)"
             />
-            
+
             <FormField
               v-model="link.url"
               :label="UI_TEXT.URL_LABEL"

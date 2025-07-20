@@ -1,7 +1,7 @@
 export async function copy(text: string) {
   try {
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(text)
   } catch (err) {
-    console.error("Failed to copy to clipboard:", err);
+    console.error('Failed to copy to clipboard:', err)
   }
 }

@@ -41,7 +41,7 @@ export function removeLinkFromArray(links: Link[], index: number): Link[] {
  */
 export function processLinksForSave(
   links: Link[],
-  validateFn: (link: Link, allLinks: Link[], index: number) => { isValid: boolean; error?: string }
+  validateFn: (link: Link, allLinks: Link[], index: number) => { isValid: boolean; error?: string },
 ): { validLinks: Link[]; hasErrors: boolean; errorCount: number } {
   let hasErrors = false
   let errorCount = 0
@@ -50,7 +50,7 @@ export function processLinksForSave(
   for (let i = 0; i < links.length; i++) {
     const link = links[i]
     const validation = validateFn(link, links, i)
-    
+
     if (validation.isValid) {
       validLinks.push(normalizeLink(link))
     } else {
@@ -61,5 +61,5 @@ export function processLinksForSave(
     }
   }
 
-  return { validLinks, hasErrors, errorCount }
+  return { errorCount, hasErrors, validLinks }
 }

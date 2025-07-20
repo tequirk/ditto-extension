@@ -15,7 +15,7 @@ interface Emits {
 const props = withDefaults(defineProps<Props>(), {
   placeholder: '',
   hasError: false,
-  type: 'text'
+  type: 'text',
 })
 
 const emit = defineEmits<Emits>()

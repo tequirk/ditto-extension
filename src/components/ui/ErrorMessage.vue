@@ -6,7 +6,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   message: '',
-  show: false
+  show: false,
 })
 </script>
 

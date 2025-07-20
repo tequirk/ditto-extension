@@ -16,9 +16,7 @@ function handleAddLink() {
 <template>
   <div class="flex flex-col flex-1">
     <!-- Empty State Content -->
-    <div
-      class="flex flex-col justify-center items-center text-center py-2.5 px-5 flex-1 mb-[72px]"
-    >
+    <div class="flex flex-col justify-center items-center text-center py-2.5 px-5 flex-1 mb-[72px]">
       <img
         src="/splash-light.svg"
         :alt="UI_TEXT.EMPTY_STATE_ALT"

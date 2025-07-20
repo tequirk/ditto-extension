@@ -1,16 +1,13 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
+
+import { useErrorHandling } from '../composables/useErrorHandling'
+import { useValidation } from '../composables/useValidation'
+import { COPY_FEEDBACK_DURATION, DEFAULT_ERRORS } from '../constants'
 import * as data from '../data'
 import * as clipboard from '../services/clipboard'
-import { useValidation } from '../composables/useValidation'
-import { useErrorHandling } from '../composables/useErrorHandling'
-import { 
-  addLinkToArray,
-  removeLinkFromArray, 
-  processLinksForSave
-} from '../utils/linkUtils'
-import { COPY_FEEDBACK_DURATION, DEFAULT_ERRORS } from '../constants'
 import type { Link } from '../types'
+import { addLinkToArray, processLinksForSave, removeLinkFromArray } from '../utils/linkUtils'
 
 export const useLinksStore = defineStore('links', () => {
   // State
@@ -30,7 +27,7 @@ export const useLinksStore = defineStore('links', () => {
     const result = await handleAsync(async () => {
       return await data.getLinks()
     }, DEFAULT_ERRORS.LOAD_FAILED)
-    
+
     links.value = result ?? []
   }
 
@@ -38,7 +35,7 @@ export const useLinksStore = defineStore('links', () => {
     const result = await handleAsync(async () => {
       return await data.saveLinks(linksData)
     }, DEFAULT_ERRORS.SAVE_FAILED)
-    
+
     if (result) {
       links.value = result
     }
@@ -96,9 +93,8 @@ export const useLinksStore = defineStore('links', () => {
 
   function finishEditing() {
     // Validate all links before saving
-    const { validLinks, hasErrors } = processLinksForSave(
-      links.value,
-      (link, allLinks, index) => validateLink(link, allLinks, index)
+    const { validLinks, hasErrors } = processLinksForSave(links.value, (link, allLinks, index) =>
+      validateLink(link, allLinks, index),
     )
 
     if (hasErrors) {
@@ -130,28 +126,29 @@ export const useLinksStore = defineStore('links', () => {
   }
 
   return {
-    // State
-    links,
-    isManaging,
-    isAdding,
-    error: errorHandlingError,
-    
-    // Getters
-    hasLinks,
-    
-    // Actions
-    loadLinks,
-    saveLinks,
-    copyToClipboard,
     addLink,
-    deleteLink,
-    reorderLinks,
-    startEditing,
-    finishEditing,
-    startAdding,
     cancelAdding,
     clearError,
-    validateLinkInRealTime,
+    copyToClipboard,
+    deleteLink,
+    error: errorHandlingError,
+
+    finishEditing,
+    // Getters
+    hasLinks,
     initialize,
+    isAdding,
+
+    isManaging,
+    // State
+    links,
+
+    // Actions
+    loadLinks,
+    reorderLinks,
+    saveLinks,
+    startAdding,
+    startEditing,
+    validateLinkInRealTime,
   }
 })

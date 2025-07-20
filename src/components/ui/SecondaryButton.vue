@@ -6,12 +6,12 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
-  size: 'md'
+  size: 'md',
 })
 
 const sizeClasses = {
   sm: 'py-2 px-3.5 text-sm w-20',
-  md: 'py-2 px-4 text-sm font-medium'
+  md: 'py-2 px-4 text-sm font-medium',
 }
 </script>
 

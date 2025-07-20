@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Link } from '../types'
-import { getDomainFromUrl, getDefaultFaviconUrl } from '../utils/urlUtils'
 import { UI_TEXT } from '../constants'
+import type { Link } from '../types'
+import { getDefaultFaviconUrl, getDomainFromUrl } from '../utils/urlUtils'
 import CopyButton from './ui/CopyButton.vue'
 
 const props = defineProps<{
@@ -28,15 +28,18 @@ function handleFaviconError(event: Event) {
 function handleCopy() {
   emit('copy', props.link)
 }
-
 </script>
 
 <template>
   <div
     class="flex justify-between items-center h-10 mb-1.5 bg-white/80 dark:bg-[#2b2b2b] rounded-lg transition-all duration-200 border overflow-hidden"
-    :class="link.isCopied ? 'border-[#61af62] dark:border-[#61af62]' : 'border-[#ccc] dark:border-[#393939]'"
+    :class="
+      link.isCopied
+        ? 'border-[#61af62] dark:border-[#61af62]'
+        : 'border-[#ccc] dark:border-[#393939]'
+    "
   >
-    <div class="flex items-center flex-1 min-w-0 px-2.5 py-2">      
+    <div class="flex items-center flex-1 min-w-0 px-2.5 py-2">
       <img
         :src="`https://www.google.com/s2/favicons?domain=${getDomain(link.url)}`"
         :alt="UI_TEXT.FAVICON_ALT"
@@ -49,9 +52,6 @@ function handleCopy() {
         {{ link.label }}
       </span>
     </div>
-    <CopyButton 
-      :is-copied="link.isCopied"
-      @click="handleCopy"
-    />
+    <CopyButton :is-copied="link.isCopied" @click="handleCopy" />
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { UI_TEXT } from '../constants'
+import type { Link } from '../types'
 import LinkItem from './LinkItem.vue'
 import TextButton from './ui/TextButton.vue'
-import type { Link } from '../types'
-import { UI_TEXT } from '../constants'
 
 interface Props {
   links: Link[]
@@ -14,7 +14,7 @@ interface Emits {
   (e: 'reorder', newOrder: Link[]): void
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 function handleCopy(link: Link) {
@@ -29,9 +29,7 @@ function handleEdit() {
 <template>
   <div class="flex flex-col flex-1">
     <!-- Links List -->
-    <div 
-      class="flex flex-col overflow-y-auto max-h-[300px] px-3 mb-[72px]"
-    >
+    <div class="flex flex-col overflow-y-auto max-h-[300px] px-3 mb-[72px]">
       <LinkItem
         v-for="(link, index) in links"
         :key="`${link.label}-${link.url}`"

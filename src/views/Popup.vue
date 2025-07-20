@@ -1,61 +1,61 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import * as theme from "../services/theme";
-import { useLinksStore } from "../stores/useLinksStore";
-import LinkModal from "../components/LinkModal.vue";
-import AppHeader from "../components/AppHeader.vue";
-import EmptyState from "../components/EmptyState.vue";
-import LinksList from "../components/LinksList.vue";
-import EditMode from "../components/EditMode.vue";
+import { onMounted } from 'vue'
 
-import type { Link } from "../types";
+import AppHeader from '../components/AppHeader.vue'
+import EditMode from '../components/EditMode.vue'
+import EmptyState from '../components/EmptyState.vue'
+import LinkModal from '../components/LinkModal.vue'
+import LinksList from '../components/LinksList.vue'
+import * as theme from '../services/theme'
+import { useLinksStore } from '../stores/useLinksStore'
+import type { Link } from '../types'
 
 // Use the links store
-const store = useLinksStore();
+const store = useLinksStore()
 
 // Initialize dark mode and load data on mount
 onMounted(async () => {
-  theme.attach();
-  await store.initialize();
-});
+  theme.attach()
+  await store.initialize()
+})
 
 // Event handlers that delegate to store actions
 function handleCopy(link: Link) {
-  store.copyToClipboard(link);
+  store.copyToClipboard(link)
 }
 
 function handleEdit() {
-  store.startEditing();
+  store.startEditing()
 }
 
 function handleReorder(newOrder: Link[]) {
-  store.reorderLinks(newOrder);
+  store.reorderLinks(newOrder)
 }
 
 function handleDelete(index: number) {
-  store.deleteLink(index);
+  store.deleteLink(index)
 }
 
 function handleValidate(link: Link, index: number) {
-  store.validateLinkInRealTime(link, index);
+  store.validateLinkInRealTime(link, index)
 }
 
 function handleFinish() {
-  store.finishEditing();
+  store.finishEditing()
 }
 
 function handleAddLink() {
-  store.startAdding();
+  store.startAdding()
 }
 
 function handleCancel() {
-  store.cancelAdding();
+  store.cancelAdding()
 }
 
 async function handleSave(link: Link) {
-  const success = await store.addLink(link);
+  const success = await store.addLink(link)
   if (success) {
-    store.cancelAdding();
+    store.cancelAdding()
   }
 }
 </script>
@@ -90,14 +90,11 @@ async function handleSave(link: Link) {
       />
 
       <!-- Empty State -->
-      <EmptyState 
-        v-else-if="!store.hasLinks" 
-        @add-link="handleAddLink"
-      />
+      <EmptyState v-else-if="!store.hasLinks" @add-link="handleAddLink" />
     </div>
 
     <!-- Add/Edit Modal -->
-    <LinkModal 
+    <LinkModal
       :is-open="store.isAdding"
       :error="store.error"
       @close="handleCancel"

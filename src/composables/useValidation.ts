@@ -1,5 +1,5 @@
-import type { Link } from '../types'
 import { VALIDATION_MESSAGES } from '../constants'
+import type { Link } from '../types'
 
 export interface ValidationResult {
   error?: string
@@ -10,11 +10,7 @@ export function useValidation() {
   /**
    * Validate a link for basic requirements and duplicates
    */
-  function validateLink(
-    link: Link,
-    allLinks: Link[],
-    excludeIndex?: number
-  ): ValidationResult {
+  function validateLink(link: Link, allLinks: Link[], excludeIndex?: number): ValidationResult {
     const label = link.label.trim()
     const url = link.url.trim()
 
@@ -36,17 +32,16 @@ export function useValidation() {
     // Check for duplicates
     const duplicateIndex = allLinks.findIndex(
       (existing, index) =>
-        index !== excludeIndex &&
-        (existing.label === label || existing.url === url)
+        index !== excludeIndex && (existing.label === label || existing.url === url),
     )
 
     if (duplicateIndex !== -1) {
       const duplicate = allLinks[duplicateIndex]
-      
+
       // Check which field is duplicated and provide specific message
       const hasDuplicateTitle = duplicate.label === label
       const hasDuplicateUrl = duplicate.url === url
-      
+
       if (hasDuplicateTitle && hasDuplicateUrl) {
         return {
           error: VALIDATION_MESSAGES.DUPLICATE_BOTH,
