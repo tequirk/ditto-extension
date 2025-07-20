@@ -12,7 +12,7 @@ interface Emits {
   (e: 'input', event: Event): void
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   placeholder: '',
   hasError: false,
   type: 'text',

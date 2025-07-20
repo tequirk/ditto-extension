@@ -5,7 +5,7 @@
     "dev": "web-ext run --config web-ext.config.mjs & nodemon -e css,html,json,js,ts,vue --watch src/ --exec \"npm run build-lite\"",
     "build-lite": "vite build",
     "build": "vue-tsc --noEmit && vite build && web-ext --config=web-ext.config.mjs build",
-    "lint": "eslint --fix src/**/*.{ts,vue}",
+    "lint": "eslint . --fix",
     "format": "prettier --write src/"
   },
   "dependencies": {

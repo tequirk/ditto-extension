@@ -4,7 +4,7 @@ interface Props {
   show?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   message: '',
   show: false,
 })

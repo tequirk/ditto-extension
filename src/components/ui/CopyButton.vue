@@ -3,7 +3,7 @@ interface Props {
   isCopied?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   isCopied: false,
 })
 </script>
