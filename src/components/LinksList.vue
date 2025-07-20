@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useSortable } from '@vueuse/integrations/useSortable'
 import LinkItem from './LinkItem.vue'
 import TextButton from './ui/TextButton.vue'
 import type { Link } from '../types'
@@ -19,26 +17,6 @@ interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-// Ref for the sortable container
-const sortableContainer = ref<HTMLElement>()
-
-// Setup sortable functionality
-useSortable(sortableContainer, props.links, {
-  animation: 200,
-  ghostClass: 'sortable-ghost',
-  chosenClass: 'sortable-chosen',
-  dragClass: 'sortable-drag',
-  onUpdate: (e: { oldIndex?: number; newIndex?: number }) => {
-    // Create new array with reordered items
-    if (e.oldIndex !== undefined && e.newIndex !== undefined) {
-      const newOrder = [...props.links]
-      const [removed] = newOrder.splice(e.oldIndex, 1)
-      newOrder.splice(e.newIndex, 0, removed)
-      emit('reorder', newOrder)
-    }
-  }
-})
-
 function handleCopy(link: Link) {
   emit('copy', link)
 }
@@ -52,7 +30,6 @@ function handleEdit() {
   <div class="flex flex-col flex-1">
     <!-- Links List -->
     <div 
-      ref="sortableContainer"
       class="flex flex-col overflow-y-auto max-h-[300px] px-3 mb-[72px]"
     >
       <LinkItem
@@ -60,7 +37,7 @@ function handleEdit() {
         :key="`${link.label}-${link.url}`"
         :link="link"
         :index="index"
-        class="cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] transition-colors duration-200"
+        class="hover:bg-white/90 dark:hover:bg-[#2d2d2d] transition-colors duration-200"
         @copy="handleCopy"
       />
     </div>
@@ -75,20 +52,3 @@ function handleEdit() {
     </div>
   </div>
 </template>
-
-<style scoped>
-.sortable-ghost {
-  opacity: 0.5;
-  background: #f3f4f6;
-}
-
-.sortable-chosen {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.sortable-drag {
-  transform: rotate(2deg);
-}
-</style>
