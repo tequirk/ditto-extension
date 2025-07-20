@@ -33,8 +33,8 @@ function handleCopy() {
 
 <template>
   <div
-    class="flex justify-between items-center h-10 mb-1.5 bg-white/80 dark:bg-[#2b2b2b] rounded-lg transition-all duration-200 border border-[#ccc] dark:border-[#393939] overflow-hidden"
-    :class="{ 'border-[#61af62]': link.isCopied }"
+    class="flex justify-between items-center h-10 mb-1.5 bg-white/80 dark:bg-[#2b2b2b] rounded-lg transition-all duration-200 border overflow-hidden"
+    :class="link.isCopied ? 'border-[#61af62] dark:border-[#61af62]' : 'border-[#ccc] dark:border-[#393939]'"
   >
     <div class="flex items-center flex-1 min-w-0 px-2.5 py-2">      
       <img
