@@ -1,3 +1,46 @@
+<template>
+  <div
+    class="font-[sans-serif] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] overflow-hidden flex flex-col"
+  >
+    <!-- Header -->
+    <AppHeader />
+
+    <!-- Main Content -->
+    <div class="flex flex-col overflow-hidden min-h-0">
+      <!-- Links List -->
+      <LinksList
+        v-if="store.hasLinks && !store.isManaging"
+        :links="store.links"
+        @copy="handleCopy"
+        @edit="handleEdit"
+        @reorder="handleReorder"
+      />
+
+      <!-- Edit Mode -->
+      <EditMode
+        v-else-if="store.isManaging"
+        :links="store.links"
+        @delete="handleDelete"
+        @validate="handleValidate"
+        @finish="handleFinish"
+        @add-link="handleAddLink"
+        @reorder="handleReorder"
+      />
+
+      <!-- Empty State -->
+      <EmptyState v-else-if="!store.hasLinks" @add-link="handleAddLink" />
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <LinkModal
+      :is-open="store.isAdding"
+      :error="store.error"
+      @close="handleCancel"
+      @save="handleSave"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
@@ -59,46 +102,3 @@ async function handleSave(link: Link) {
   }
 }
 </script>
-
-<template>
-  <div
-    class="font-[sans-serif] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] overflow-hidden flex flex-col"
-  >
-    <!-- Header -->
-    <AppHeader />
-
-    <!-- Main Content -->
-    <div class="flex flex-col overflow-hidden min-h-0">
-      <!-- Links List -->
-      <LinksList
-        v-if="store.hasLinks && !store.isManaging"
-        :links="store.links"
-        @copy="handleCopy"
-        @edit="handleEdit"
-        @reorder="handleReorder"
-      />
-
-      <!-- Edit Mode -->
-      <EditMode
-        v-else-if="store.isManaging"
-        :links="store.links"
-        @delete="handleDelete"
-        @validate="handleValidate"
-        @finish="handleFinish"
-        @add-link="handleAddLink"
-        @reorder="handleReorder"
-      />
-
-      <!-- Empty State -->
-      <EmptyState v-else-if="!store.hasLinks" @add-link="handleAddLink" />
-    </div>
-
-    <!-- Add/Edit Modal -->
-    <LinkModal
-      :is-open="store.isAdding"
-      :error="store.error"
-      @close="handleCancel"
-      @save="handleSave"
-    />
-  </div>
-</template>

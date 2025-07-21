@@ -10,8 +10,8 @@ withDefaults(defineProps<Props>(), {
 })
 
 const sizeClasses = {
-  sm: 'py-2 px-3.5 text-sm w-20',
-  md: 'py-2 px-4 text-sm font-medium',
+  sm: 'py-1.5 px-3.5 text-sm w-20',
+  md: 'py-1.5 px-4 text-sm font-medium',
 }
 </script>
 

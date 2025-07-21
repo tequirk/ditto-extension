@@ -1,3 +1,12 @@
+<template>
+  <button
+    class="bg-[#edeceb] dark:bg-[#555] text-black dark:text-white border-none rounded-md cursor-pointer transition-all duration-200 hover:brightness-90 dark:hover:brightness-110"
+    :class="sizeClasses[size]"
+  >
+    <slot />
+  </button>
+</template>
+
 <script setup lang="ts">
 interface Props {
   disabled?: boolean
@@ -10,16 +19,7 @@ withDefaults(defineProps<Props>(), {
 })
 
 const sizeClasses = {
-  sm: 'py-2 px-3.5 text-sm w-20',
-  md: 'py-2 px-4 text-sm font-medium',
+  sm: 'py-1.5 px-3.5 text-sm w-20',
+  md: 'py-1.5 px-4 text-sm font-medium',
 }
 </script>
-
-<template>
-  <button
-    class="bg-[#edeceb] dark:bg-[#555] text-black dark:text-white border-none rounded-md cursor-pointer transition-all duration-200 hover:brightness-90 dark:hover:brightness-110"
-    :class="sizeClasses[size]"
-  >
-    <slot />
-  </button>
-</template>
