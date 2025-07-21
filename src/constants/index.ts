@@ -26,7 +26,7 @@ export const DEFAULT_ERRORS = {
 // UI Text constants
 export const UI_TEXT = {
   APP_TAGLINE: 'All of your most-used links at-the-ready, in one place.',
-  BUY_COFFEE_LINK: 'Buy me a ☕️???',
+  BUY_COFFEE_LINK: 'Buy me a ☕️?',
   BUY_COFFEE_URL: 'https://buymeacoffee.com/natebenson',
 
   // Buttons
