@@ -20,11 +20,21 @@
         {{ link.label }}
       </span>
     </div>
+    <button
+      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-500 hover:text-gray-400 hover:cursor-pointer transition-colors"
+      type="button"
+      @click="handleOpen"
+      :aria-label="UI_TEXT.OPEN_LINK_BUTTON"
+    >
+      <ArrowTopRightOnSquareIcon class="w-5 h-5" />
+    </button>
     <CopyButton :is-copied="link.isCopied" @click="handleCopy" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline'
+
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
 import { getDefaultFaviconUrl, getDomainFromUrl } from '../utils/urlUtils'
@@ -53,5 +63,10 @@ function handleFaviconError(event: Event) {
 // Handle copy button click
 function handleCopy() {
   emit('copy', props.link)
+}
+
+// Handle open link button click
+function handleOpen() {
+  window.open(props.link.url, '_blank')
 }
 </script>

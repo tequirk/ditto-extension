@@ -9,7 +9,6 @@
         :index="index"
         class="hover:bg-white/90 dark:hover:bg-[#2d2d2d] transition-colors duration-200"
         @copy="handleCopy"
-        @dblclick="handleOpen(link)"
       />
     </div>
 
@@ -49,10 +48,5 @@ function handleCopy(link: Link) {
 
 function handleEdit() {
   emit('edit')
-}
-
-// Handle navigation to link on double-click
-function handleOpen(link: Link) {
-  window.open(link.url, '_blank')
 }
 </script>
