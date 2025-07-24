@@ -62,6 +62,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
+function getCurrentTabUrl(): Promise<string> {
+  return new Promise((resolve) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tab = tabs[0]
+      resolve(tab?.url || '')
+    })
+  })
+}
+
 const newLink = reactive<Link>({
   label: '',
   url: '',
@@ -81,10 +90,10 @@ const urlError = computed(() => {
 // Reset form when modal opens/closes
 watch(
   () => props.isOpen,
-  (isOpen) => {
+  async (isOpen) => {
     if (isOpen) {
       newLink.label = ''
-      newLink.url = ''
+      newLink.url = await getCurrentTabUrl()
     }
   },
 )
