@@ -27,7 +27,7 @@
             />
           </div>
           <DeleteButton @click="handleDelete(index)">
-            {{ UI_TEXT.DELETE_ICON }}
+            <TrashIcon class="w-6 h-6 inline-block text-white" />
           </DeleteButton>
         </div>
       </div>
@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import { TrashIcon } from '@heroicons/vue/24/outline'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import { ref } from 'vue'
 

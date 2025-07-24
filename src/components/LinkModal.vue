@@ -63,8 +63,9 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<Emits>()
 
 function getCurrentTabUrl(): Promise<string> {
+  const tabsApi = typeof browser !== 'undefined' ? browser.tabs : chrome.tabs
   return new Promise((resolve) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    tabsApi.query({ active: true, currentWindow: true }, (tabs: browser.tabs.Tab[]) => {
       const tab = tabs[0]
       resolve(tab?.url || '')
     })
