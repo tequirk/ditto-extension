@@ -9,6 +9,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@tailwindcss/vite": "^4.1.11",
     "@vueuse/components": "^13.5.0",
     "@vueuse/core": "^13.5.0",
