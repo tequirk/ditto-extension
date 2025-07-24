@@ -1,0 +1,15 @@
+/* Sortable drag-and-drop styles */
+.sortable-ghost {
+  opacity: 0.5;
+  background: #f3f4f6;
+}
+
+.sortable-chosen {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.sortable-drag {
+  transform: rotate(1deg);
+}
