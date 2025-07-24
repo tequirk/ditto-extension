@@ -102,3 +102,19 @@ async function handleSave(link: Link) {
   }
 }
 </script>
+
+<style>
+html,
+body {
+  background: #1e1e1e;
+}
+
+/* .app-overscroll-red {
+  background: #e8e5e2;
+  z-index: 1;
+}
+
+.dark .app-overscroll-red {
+  background: #2a2a2a;
+} */
+</style>
