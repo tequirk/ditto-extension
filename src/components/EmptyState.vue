@@ -21,11 +21,13 @@ function handleAddLink() {
         src="/splash-light.svg"
         :alt="UI_TEXT.EMPTY_STATE_ALT"
         class="w-[200px] h-auto mb-[26px] dark:hidden"
+        draggable="false"
       />
       <img
         src="/splash-dark.svg"
         :alt="UI_TEXT.EMPTY_STATE_ALT"
         class="w-[200px] h-auto mb-[26px] hidden dark:block"
+        draggable="false"
       />
     </div>
 
@@ -42,6 +44,7 @@ function handleAddLink() {
           src="/splash-arrow.svg"
           :alt="UI_TEXT.GET_STARTED_ARROW_ALT"
           class="w-[100px] h-auto opacity-30 dark:opacity-50"
+          draggable="false"
         />
       </div>
 
