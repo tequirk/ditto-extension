@@ -7,16 +7,13 @@
         : 'bg-[#d1cac2] dark:bg-[#333333] text-[#555] dark:text-white hover:bg-[#dfdad4] dark:hover:bg-[#404040]'
     "
   >
-    <HeroIconClipboard v-if="!isCopied" class="w-4 h-4 inline-block" />
-    <HeroIconCheck v-else class="w-4 h-4 inline-block" />
+    <ClipboardIcon v-if="!isCopied" class="w-4 h-4 inline-block" />
+    <CheckIcon v-else class="w-4 h-4 inline-block" />
   </button>
 </template>
 
 <script setup lang="ts">
-import {
-  CheckIcon as HeroIconCheck,
-  ClipboardIcon as HeroIconClipboard,
-} from '@heroicons/vue/24/outline'
+import { CheckIcon, ClipboardIcon } from '@heroicons/vue/24/outline'
 
 interface Props {
   isCopied?: boolean
