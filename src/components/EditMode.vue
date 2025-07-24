@@ -115,7 +115,8 @@ function handleAddLink() {
 <style scoped>
 .sortable-ghost {
   opacity: 0.5;
-  background: #f3f4f6;
+  filter: brightness(2);
+  border: 2px dashed #af8c61;
 }
 
 .sortable-chosen {
