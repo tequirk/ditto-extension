@@ -43,7 +43,7 @@
       </span>
     </div>
     <button
-      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-400 hover:text-gray-300 dark:text-gray-500 dark:hover:text-gray-400 hover:cursor-pointer transition-colors"
+      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 hover:cursor-pointer transition-colors"
       type="button"
       @click="handleOpen"
       :aria-label="UI_TEXT.OPEN_LINK_BUTTON"

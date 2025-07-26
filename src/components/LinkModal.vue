@@ -26,7 +26,9 @@
           type="url"
         />
       </div>
-      <div class="flex h-12 px-3 justify-between items-center dark:border-t dark:border-[#444]">
+      <div
+        class="flex h-12 px-3 justify-between items-center border-t border-[#ddd] dark:border-[#444]"
+      >
         <SecondaryButton size="sm" @click="handleCancel">
           {{ UI_TEXT.CANCEL_BUTTON }}
         </SecondaryButton>

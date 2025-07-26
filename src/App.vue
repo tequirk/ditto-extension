@@ -110,17 +110,7 @@ body {
   background: #e8e5e2;
 }
 
-.dark html,
-.dark body {
+.dark {
   background: #1e1e1e;
 }
-
-/* .app-overscroll-red {
-  background: #e8e5e2;
-  z-index: 1;
-}
-
-.dark .app-overscroll-red {
-  background: #2a2a2a;
-} */
 </style>
