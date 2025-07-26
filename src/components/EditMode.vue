@@ -2,15 +2,14 @@
   <div class="flex flex-col flex-1 min-h-0">
     <!-- Edit Mode -->
     <div class="flex-1 overflow-y-auto px-3 pb-0 max-h-[400px]">
-      <div ref="sortableContainer" class="flex flex-col gap-2">
+      <div ref="sortableContainer" class="flex flex-col gap-2 mt-2">
         <div
           v-for="(link, index) in links"
           :key="link.id"
-          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0"
+          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0 last:mb-2"
           :class="{
             'duration-200': props.deletingIndex !== index,
             'duration-300': props.deletingIndex === index,
-            'mb-2': index === links.length - 1,
             // Tailwind sandwich animation classes
             '!max-h-0 !pt-0 !pb-0 !mt-0 !mb-0 !overflow-hidden !opacity-0 !scale-y-0 !origin-center':
               props.deletingIndex === index,
@@ -133,7 +132,8 @@ function handleAddLink() {
 .sortable-ghost {
   opacity: 0.5;
   filter: brightness(2);
-  border: 2px dashed #af8c61;
+  outline: 2px dashed #af8c61;
+  outline-offset: -2px;
 }
 
 .sortable-chosen {
