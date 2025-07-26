@@ -1,10 +1,18 @@
 import type { Link } from '../types'
 
 /**
+ * Generates a unique ID for a link using crypto.randomUUID
+ */
+export function generateLinkId(): string {
+  return crypto.randomUUID()
+}
+
+/**
  * Normalizes a link by trimming whitespace from label and url
  */
 export function normalizeLink(link: Link): Link {
   return {
+    ...link,
     label: link.label.trim(),
     url: link.url.trim(),
   }
@@ -25,7 +33,8 @@ export function createNormalizedLink(link: Link): Link {
  * Adds a link to an array and returns a new array
  */
 export function addLinkToArray(links: Link[], newLink: Link): Link[] {
-  return [...links, normalizeLink(newLink)]
+  const linkWithId = newLink.id ? newLink : { ...newLink, id: generateLinkId() }
+  return [...links, normalizeLink(linkWithId)]
 }
 
 /**

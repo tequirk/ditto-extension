@@ -4,7 +4,7 @@
     <div ref="sortableContainer" class="flex flex-col overflow-y-auto px-3 mb-[72px] gap-2">
       <div
         v-for="(link, index) in links"
-        :key="`${link.label}-${link.url}-${index}`"
+        :key="link.id"
         class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border border-transparent dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d]"
       >
         <div class="flex w-full items-start">

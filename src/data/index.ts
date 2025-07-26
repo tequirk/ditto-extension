@@ -1,6 +1,7 @@
 import * as browser from 'webextension-polyfill'
 
 import type { Link } from '../types'
+import { generateLinkId } from '../utils/linkUtils'
 
 export async function getLinks() {
   let data = []
@@ -21,7 +22,11 @@ export async function getLinks() {
     data = []
   }
 
-  return data
+  // Ensure all links have IDs
+  return data.map((link: Link) => ({
+    ...link,
+    id: link.id || generateLinkId(),
+  }))
 }
 
 export async function saveLinks(links: Link[]) {

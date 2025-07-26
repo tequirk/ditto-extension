@@ -41,6 +41,7 @@ import { computed, reactive, watch } from 'vue'
 
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
+import { generateLinkId } from '../utils/linkUtils'
 import ErrorMessage from './ui/ErrorMessage.vue'
 import FormField from './ui/FormField.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
@@ -73,6 +74,7 @@ function getCurrentTabUrl(): Promise<string> {
 }
 
 const newLink = reactive<Link>({
+  id: '',
   label: '',
   url: '',
 })
@@ -93,6 +95,7 @@ watch(
   () => props.isOpen,
   async (isOpen) => {
     if (isOpen) {
+      newLink.id = generateLinkId()
       newLink.label = ''
       newLink.url = await getCurrentTabUrl()
     }
