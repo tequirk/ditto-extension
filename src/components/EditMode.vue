@@ -6,7 +6,7 @@
         <div
           v-for="(link, index) in links"
           :key="link.id"
-          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0"
+          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0"
           :class="{
             'mb-2': index === links.length - 1,
           }"
@@ -125,8 +125,8 @@ function handleAddLink() {
 .sortable-ghost {
   opacity: 0.5;
   filter: brightness(2);
-  border: 2px dashed #af8c61;
-  box-sizing: border-box;
+  outline: 2px dashed #af8c61;
+  outline-offset: -2px;
 }
 
 .sortable-chosen {
