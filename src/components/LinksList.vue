@@ -14,7 +14,7 @@
 
     <!-- Links Footer -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-center items-center gap-3 min-h-7 dark:text-white"
+      class="fixed bottom-0 left-0 right-0 bg-[#e8e5e2] dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-center items-center gap-3 min-h-7 dark:text-white"
     >
       <TextButton @click="handleEdit">
         {{ UI_TEXT.EDIT_LINKS_BUTTON }}
