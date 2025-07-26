@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col flex-1 min-h-0">
     <!-- Edit Mode -->
-    <div class="flex-1 overflow-y-auto px-3 pb-0 max-h-[300px]">
+    <div class="flex-1 overflow-y-auto px-3 pb-0 max-h-[400px]">
       <div ref="sortableContainer" class="flex flex-col gap-2">
         <div
           v-for="(link, index) in links"
