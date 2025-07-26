@@ -4,6 +4,7 @@
       {{ label }}
     </label>
     <input
+      ref="inputRef"
       :value="modelValue"
       :type="type"
       :placeholder="placeholder"
@@ -15,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 interface Props {
   modelValue: string
   label: string
@@ -35,6 +38,16 @@ withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
+
+// Template ref for the input element
+const inputRef = ref<HTMLInputElement>()
+
+// Expose focus method for parent components
+function focus() {
+  inputRef.value?.focus()
+}
+
+defineExpose({ focus })
 
 function handleInput(event: Event) {
   const target = event.target as HTMLInputElement
