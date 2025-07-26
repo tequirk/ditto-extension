@@ -35,6 +35,7 @@
     <LinkModal
       :is-open="store.isAdding"
       :error="store.error"
+      :existing-links="store.links"
       @close="handleCancel"
       @save="handleSave"
     />
