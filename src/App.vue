@@ -39,13 +39,22 @@
       @close="handleCancel"
       @save="handleSave"
     />
+
+    <!-- Delete Confirmation Modal -->
+    <DeleteConfirmation
+      :is-open="showDeleteConfirmation"
+      :link-title="linkToDelete?.label"
+      @cancel="handleCancelDelete"
+      @confirm="handleConfirmDelete"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import AppHeader from './components/AppHeader.vue'
+import DeleteConfirmation from './components/DeleteConfirmation.vue'
 import EditMode from './components/EditMode.vue'
 import EmptyState from './components/EmptyState.vue'
 import LinkModal from './components/LinkModal.vue'
@@ -56,6 +65,11 @@ import type { Link } from './types'
 
 // Use the links store
 const store = useLinksStore()
+
+// Delete confirmation state
+const showDeleteConfirmation = ref(false)
+const linkToDelete = ref<Link | null>(null)
+const linkIndexToDelete = ref<number>(-1)
 
 // Initialize dark mode and load data on mount
 onMounted(async () => {
@@ -77,7 +91,23 @@ function handleReorder(newOrder: Link[]) {
 }
 
 function handleDelete(index: number) {
-  store.deleteLink(index)
+  // Show confirmation dialog instead of directly deleting
+  linkToDelete.value = store.links[index]
+  linkIndexToDelete.value = index
+  showDeleteConfirmation.value = true
+}
+
+function handleCancelDelete() {
+  showDeleteConfirmation.value = false
+  linkToDelete.value = null
+  linkIndexToDelete.value = -1
+}
+
+function handleConfirmDelete() {
+  if (linkIndexToDelete.value >= 0) {
+    store.deleteLink(linkIndexToDelete.value)
+  }
+  handleCancelDelete()
 }
 
 function handleValidate(link: Link, index: number) {
