@@ -7,7 +7,7 @@
       class="bg-white dark:bg-[#2b2b2b] rounded-lg w-80 max-w-[90%] shadow-[0_10px_25px_rgba(0,0,0,0.3)] dark:border dark:border-[#393939]"
     >
       <div class="flex flex-col flex-1 px-5 py-6 gap-4">
-        <div class="text-center">
+        <div class="text-center text-sm">
           <p class="text-gray-600 dark:text-gray-300">
             {{ UI_TEXT.DELETE_CONFIRMATION_MESSAGE }}
           </p>
