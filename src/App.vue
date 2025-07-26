@@ -107,6 +107,11 @@ async function handleSave(link: Link) {
 <style>
 html,
 body {
+  background: #e8e5e2;
+}
+
+.dark html,
+.dark body {
   background: #1e1e1e;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-[#edeceb] dark:bg-[#555] text-black dark:text-white border-none rounded-md cursor-pointer transition-all duration-200 hover:brightness-90 dark:hover:brightness-110"
+    class="bg-[#d3d3d3] dark:bg-[#555] text-black dark:text-white border-none rounded-md cursor-pointer transition-all duration-200 hover:brightness-90 dark:hover:brightness-110"
     :class="sizeClasses[size]"
   >
     <slot />

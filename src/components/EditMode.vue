@@ -5,7 +5,7 @@
       <div
         v-for="(link, index) in links"
         :key="link.id"
-        class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border border-transparent dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d]"
+        class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d]"
       >
         <div class="flex w-full items-start">
           <div class="flex flex-col flex-1 px-2 py-2.5 gap-3">
@@ -27,7 +27,9 @@
             />
           </div>
           <DeleteButton @click="handleDelete(index)">
-            <TrashIcon class="w-6 h-6 inline-block text-white" />
+            <TrashIcon
+              class="w-6 h-6 inline-block text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors"
+            />
           </DeleteButton>
         </div>
       </div>
@@ -35,7 +37,7 @@
 
     <!-- Edit Mode Footer -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-between items-center gap-3 min-h-7 dark:text-white border-t border-black/10 dark:border-[#393939]"
+      class="fixed bottom-0 left-0 right-0 bg-[#e8e5e2] dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-between items-center gap-3 min-h-7 dark:text-white border-t border-black/10 dark:border-[#393939]"
     >
       <SecondaryButton @click="handleFinish">
         {{ UI_TEXT.DONE_BUTTON }}

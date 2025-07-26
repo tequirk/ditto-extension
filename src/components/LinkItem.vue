@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex justify-between items-center h-10 bg-white/80 dark:bg-[#2b2b2b] rounded-lg overflow-hidden"
+    class="relative flex justify-between items-center h-10 bg-white/80 dark:bg-[#2b2b2b] border-1 border-[#ddd] dark:border-[#393939] rounded-lg overflow-hidden"
   >
     <!-- Sweeping green animation overlay -->
     <div
@@ -43,7 +43,7 @@
       </span>
     </div>
     <button
-      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-500 hover:text-gray-400 hover:cursor-pointer transition-colors"
+      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-400 hover:text-gray-300 dark:text-gray-500 dark:hover:text-gray-400 hover:cursor-pointer transition-colors"
       type="button"
       @click="handleOpen"
       :aria-label="UI_TEXT.OPEN_LINK_BUTTON"

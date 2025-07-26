@@ -8,7 +8,7 @@
       :value="modelValue"
       :type="type"
       :placeholder="placeholder"
-      class="w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)]"
+      class="w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] bg-[#edeceb] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)]"
       :class="{ 'border-red-600 bg-red-600/10': hasError }"
       @input="handleInput"
       @paste="handlePaste"
