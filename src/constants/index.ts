@@ -46,6 +46,8 @@ export const UI_TEXT = {
   NEW_LINK_BUTTON: '+ New Link',
   SAVE_BUTTON: 'Save',
 
+  OPEN_LINK_BUTTON: 'Open Link',
+
   // Form Labels
   TITLE_LABEL: 'Title',
 

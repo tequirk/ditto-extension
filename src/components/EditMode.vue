@@ -83,6 +83,8 @@ const sortableContainer = ref<HTMLElement>()
 // Setup sortable functionality
 useSortable(sortableContainer, props.links, {
   animation: 200,
+  filter: '.ignore-drag',
+  preventOnFilter: false,
   chosenClass: 'sortable-chosen',
   dragClass: 'sortable-drag',
   ghostClass: 'sortable-ghost',
