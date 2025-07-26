@@ -9,11 +9,10 @@
     >
       <div
         :class="[
-          'absolute inset-0 bg-[#61af62] transition-transform hover:cursor-default',
+          'absolute inset-0 transition-transform hover:cursor-default slanted-skew',
           sweepFade
             ? 'transition-opacity duration-100 opacity-0'
             : 'transition-opacity duration-300 opacity-100',
-          'clip-path-[polygon(0_40%,100%_0,100%_100%,32px_100%,0_60%)]',
           sweepActive ? 'translate-x-0' : 'translate-x-full',
         ]"
       ></div>
@@ -130,3 +129,44 @@ function handleOpen() {
   window.open(props.link.url, '_blank')
 }
 </script>
+
+<style scoped>
+.slanted-skew {
+  transform: skewX(-15deg);
+  transform-origin: left center;
+  width: 110%;
+  left: -5%;
+  background:
+    /* Animated glass reflection */
+    linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 15%,
+      rgba(255, 255, 255, 0.6) 20%,
+      rgba(255, 255, 255, 0.8) 22%,
+      rgba(255, 255, 255, 0.4) 24%,
+      transparent 30%,
+      transparent 100%
+    ),
+    /* Base green glass */ rgba(97, 175, 98, 0.85);
+  background-size: 300% 100%;
+  background-position: -100% 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(97, 175, 98, 0.2);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: glass-reflection-slide 1.2s ease-out;
+}
+
+@keyframes glass-reflection-slide {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+</style>
