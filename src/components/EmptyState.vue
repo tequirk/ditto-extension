@@ -14,9 +14,9 @@ function handleAddLink() {
 </script>
 
 <template>
-  <div class="flex flex-col flex-1">
+  <div class="flex flex-col flex-1 min-h-0">
     <!-- Empty State Content -->
-    <div class="flex flex-col justify-center items-center text-center py-2.5 px-5 flex-1 mb-[72px]">
+    <div class="flex-1 flex flex-col justify-center items-center text-center py-2.5 px-5">
       <img
         src="/splash-light.svg"
         :alt="UI_TEXT.EMPTY_STATE_ALT"
@@ -33,7 +33,7 @@ function handleAddLink() {
 
     <!-- Empty State Footer -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-end items-center h-[60px] px-3 pb-3 box-border dark:text-white"
+      class="flex-shrink-0 bg-white/95 dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-end items-center h-[60px] px-3 pb-3 box-border dark:text-white"
     >
       <!-- Get started content -->
       <div

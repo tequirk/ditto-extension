@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="font-[sans-serif] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] overflow-hidden flex flex-col"
-  >
+  <div class="font-[sans-serif] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] flex flex-col">
     <!-- Header -->
     <AppHeader />
 
     <!-- Main Content -->
-    <div class="flex flex-col overflow-hidden min-h-0">
+    <div class="flex flex-col flex-1 min-h-0">
       <!-- Links List -->
       <LinksList
         v-if="store.hasLinks && !store.isManaging"
