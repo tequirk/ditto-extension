@@ -1,11 +1,18 @@
 <template>
   <div class="flex flex-col flex-1">
     <!-- Edit Mode -->
-    <div ref="sortableContainer" class="flex flex-col overflow-y-auto px-3 mb-[72px] gap-2">
+    <div ref="sortableContainer" class="flex flex-col overflow-y-auto px-3 mb-[72px]">
       <div
         v-for="(link, index) in links"
         :key="link.id"
-        class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d]"
+        class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] mb-2"
+        :class="{
+          'duration-200': props.deletingIndex !== index,
+          'duration-300': props.deletingIndex === index,
+          // Tailwind sandwich animation classes
+          '!max-h-0 !pt-0 !pb-0 !mt-0 !mb-0 !overflow-hidden !opacity-0 !scale-y-0 !origin-center':
+            props.deletingIndex === index,
+        }"
       >
         <div class="flex w-full items-start">
           <div class="flex flex-col flex-1 px-2 py-2.5 gap-3">
@@ -64,6 +71,7 @@ import SecondaryButton from './ui/SecondaryButton.vue'
 
 interface Props {
   links: Link[]
+  deletingIndex?: number
 }
 
 interface Emits {
@@ -74,7 +82,9 @@ interface Emits {
   (e: 'reorder', newOrder: Link[]): void
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  deletingIndex: -1,
+})
 const emit = defineEmits<Emits>()
 
 // Ref for the sortable container
