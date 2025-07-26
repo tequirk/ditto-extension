@@ -9,17 +9,16 @@
     >
       <div
         :class="[
-          'absolute inset-0 bg-[#61af62] transition-transform hover:cursor-default',
-          sweepFade
-            ? 'transition-opacity duration-100 opacity-0'
-            : 'transition-opacity duration-300 opacity-100',
-          'clip-path-[polygon(0_40%,100%_0,100%_100%,32px_100%,0_60%)]',
+          'absolute inset-0 transition-transform hover:cursor-default slanted-skew',
+          // sweepFade
+          //   ? 'transition-opacity duration-100 opacity-0'
+          //   : 'transition-opacity duration-300 opacity-100',
           sweepActive ? 'translate-x-0' : 'translate-x-full',
         ]"
       ></div>
       <span
         class="relative flex items-center gap-1 text-white text-xs transition-opacity duration-100"
-        :class="sweepActive && !sweepFade ? 'opacity-100 delay-75' : 'opacity-0'"
+        :class="sweepActive && !sweepFade ? 'opacity-100' : 'opacity-0'"
       >
         <CheckBadgeIcon class="w-4.25 h-4.25 text-white" />
         Copied!
@@ -130,3 +129,35 @@ function handleOpen() {
   window.open(props.link.url, '_blank')
 }
 </script>
+
+<style scoped>
+.slanted-skew {
+  width: 110%;
+  left: -5%;
+  background:
+    /* Animated glass reflection */
+    linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 15%,
+      rgba(255, 255, 255, 0.6) 20%,
+      rgba(255, 255, 255, 0.8) 22%,
+      rgba(255, 255, 255, 0.4) 24%,
+      transparent 30%,
+      transparent 100%
+    ),
+    #61af62;
+  background-size: 300% 100%;
+  background-position: -100% 0;
+  animation: glass-reflection-slide 0.8s ease-out;
+}
+
+@keyframes glass-reflection-slide {
+  0% {
+    background-position: -80% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+</style>
