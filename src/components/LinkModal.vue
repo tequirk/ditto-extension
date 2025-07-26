@@ -11,6 +11,7 @@
         <ErrorMessage :show="!!validationMessage" :message="validationMessage || ''" />
 
         <FormField
+          ref="labelFieldRef"
           v-model="newLink.label"
           :label="UI_TEXT.TITLE_LABEL"
           :placeholder="UI_TEXT.TITLE_PLACEHOLDER"
@@ -38,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 
 import { useValidation } from '../composables/useValidation'
 import { UI_TEXT } from '../constants'
@@ -71,6 +72,8 @@ const { validateLink } = useValidation()
 
 // Track whether user has attempted to save
 const hasAttemptedSave = ref(false)
+// Template ref for the label field
+const labelFieldRef = ref<InstanceType<typeof FormField>>()
 
 function getCurrentTabUrl(): Promise<string> {
   const tabsApi = typeof browser !== 'undefined' ? browser.tabs : chrome.tabs
@@ -123,6 +126,10 @@ watch(
       newLink.label = ''
       newLink.url = await getCurrentTabUrl()
       hasAttemptedSave.value = false // Reset validation state
+
+      // Focus the URL field after the DOM has updated
+      await nextTick()
+      labelFieldRef.value?.focus()
     }
   },
 )
