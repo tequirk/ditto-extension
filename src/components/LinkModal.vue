@@ -8,6 +8,7 @@
     >
       <div class="flex flex-col flex-1 px-5 py-5.5 gap-3">
         <ErrorMessage :show="!!error" :message="error" />
+        <ErrorMessage :show="!!validationMessage" :message="validationMessage || ''" />
 
         <FormField
           v-model="newLink.label"
@@ -37,8 +38,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
+import { useValidation } from '../composables/useValidation'
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
 import { generateLinkId } from '../utils/linkUtils'
@@ -50,6 +52,7 @@ import SecondaryButton from './ui/SecondaryButton.vue'
 interface Props {
   isOpen: boolean
   error?: string
+  existingLinks?: Link[]
 }
 
 interface Emits {
@@ -59,9 +62,15 @@ interface Emits {
 
 const props = withDefaults(defineProps<Props>(), {
   error: '',
+  existingLinks: () => [],
 })
 
 const emit = defineEmits<Emits>()
+
+const { validateLink } = useValidation()
+
+// Track whether user has attempted to save
+const hasAttemptedSave = ref(false)
 
 function getCurrentTabUrl(): Promise<string> {
   const tabsApi = typeof browser !== 'undefined' ? browser.tabs : chrome.tabs
@@ -79,15 +88,30 @@ const newLink = reactive<Link>({
   url: '',
 })
 
-// Computed properties for field validation
+// Computed properties for field validation - only show errors after save attempt
 const labelError = computed(() => {
-  if (!newLink.label.trim()) return false
-  return false
+  if (!hasAttemptedSave.value) return false
+  const validation = validateLink(newLink, props.existingLinks)
+  return !validation.isValid && validation.error?.includes('title')
 })
 
 const urlError = computed(() => {
-  if (!newLink.url.trim()) return false
-  return false
+  if (!hasAttemptedSave.value) return false
+  const validation = validateLink(newLink, props.existingLinks)
+  return !validation.isValid && validation.error?.includes('URL')
+})
+
+// Get validation message for display
+const validationMessage = computed(() => {
+  if (!hasAttemptedSave.value) return null
+  const validation = validateLink(newLink, props.existingLinks)
+  return validation.isValid ? null : validation.error
+})
+
+// Check if form is valid
+const isFormValid = computed(() => {
+  const validation = validateLink(newLink, props.existingLinks)
+  return validation.isValid
 })
 
 // Reset form when modal opens/closes
@@ -98,6 +122,7 @@ watch(
       newLink.id = generateLinkId()
       newLink.label = ''
       newLink.url = await getCurrentTabUrl()
+      hasAttemptedSave.value = false // Reset validation state
     }
   },
 )
@@ -107,6 +132,11 @@ function handleCancel() {
 }
 
 function handleSave() {
-  emit('save', { ...newLink })
+  hasAttemptedSave.value = true
+
+  // Only proceed with save if form is valid
+  if (isFormValid.value) {
+    emit('save', { ...newLink })
+  }
 }
 </script>
