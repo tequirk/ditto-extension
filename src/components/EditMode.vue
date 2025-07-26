@@ -6,9 +6,14 @@
         <div
           v-for="(link, index) in links"
           :key="link.id"
-          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all duration-200 border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0"
+          class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg transition-all border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0"
           :class="{
+            'duration-200': props.deletingIndex !== index,
+            'duration-300': props.deletingIndex === index,
             'mb-2': index === links.length - 1,
+            // Tailwind sandwich animation classes
+            '!max-h-0 !pt-0 !pb-0 !mt-0 !mb-0 !overflow-hidden !opacity-0 !scale-y-0 !origin-center':
+              props.deletingIndex === index,
           }"
         >
           <div class="flex w-full items-start">
@@ -69,6 +74,7 @@ import SecondaryButton from './ui/SecondaryButton.vue'
 
 interface Props {
   links: Link[]
+  deletingIndex?: number
 }
 
 interface Emits {
@@ -79,7 +85,9 @@ interface Emits {
   (e: 'reorder', newOrder: Link[]): void
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  deletingIndex: -1,
+})
 const emit = defineEmits<Emits>()
 
 // Ref for the sortable container

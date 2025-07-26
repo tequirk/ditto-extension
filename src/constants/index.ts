@@ -31,6 +31,7 @@ export const UI_TEXT = {
 
   // Buttons
   CANCEL_BUTTON: 'Cancel',
+  DELETE_BUTTON: 'Delete',
   DONE_BUTTON: 'Done',
 
   // Empty State
@@ -55,4 +56,8 @@ export const UI_TEXT = {
   TITLE_PLACEHOLDER: 'ex. My Link',
   URL_LABEL: 'Link URL',
   URL_PLACEHOLDER: 'ex. https://www.example.com/',
+
+  // Delete Confirmation
+  DELETE_CONFIRMATION_TITLE: 'Delete Link',
+  DELETE_CONFIRMATION_MESSAGE: 'Are you sure you want to delete this link?',
 } as const
