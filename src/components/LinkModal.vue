@@ -2,7 +2,6 @@
   <div
     v-if="isOpen"
     class="fixed top-0 left-0 right-0 bottom-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[1000]"
-    @keyup.enter="handleSave"
   >
     <div
       class="bg-white dark:bg-[#2b2b2b] rounded-lg w-80 max-w-[90%] shadow-[0_10px_25px_rgba(0,0,0,0.3)] dark:border dark:border-[#393939]"
@@ -42,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 
 import { useValidation } from '../composables/useValidation'
 import { UI_TEXT } from '../constants'
@@ -149,4 +148,18 @@ function handleSave() {
     emit('save', { ...newLink })
   }
 }
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    handleSave()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+})
 </script>
