@@ -8,7 +8,7 @@
     >
       <div class="flex flex-col flex-1 px-5 py-6 gap-4">
         <div class="text-center text-sm">
-          <p class="text-gray-600 dark:text-gray-300">
+          <p class="text-stone-600 dark:text-stone-300">
             {{ UI_TEXT.DELETE_CONFIRMATION_MESSAGE }}
           </p>
         </div>

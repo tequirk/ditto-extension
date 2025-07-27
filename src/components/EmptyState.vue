@@ -37,7 +37,7 @@ function handleAddLink() {
     >
       <!-- Get started content -->
       <div
-        class="flex items-center gap-3 text-base text-gray-600 dark:text-[#bbb] font-medium mr-4"
+        class="flex items-center gap-3 text-base text-stone-600 dark:text-[#bbb] font-medium mr-4"
       >
         <span>{{ UI_TEXT.GET_STARTED_TEXT }}</span>
         <img

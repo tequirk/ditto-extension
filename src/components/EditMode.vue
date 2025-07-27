@@ -34,7 +34,7 @@
             </div>
             <DeleteButton @click="handleDelete(index)">
               <TrashIcon
-                class="w-6 h-6 inline-block text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                class="w-6 h-6 inline-block text-stone-400 hover:text-stone-500 dark:hover:text-stone-300 transition-colors"
               />
             </DeleteButton>
           </div>

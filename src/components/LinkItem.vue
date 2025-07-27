@@ -36,13 +36,13 @@
         @error="handleFaviconError"
       />
       <span
-        class="text-xs text-gray-800 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis"
+        class="text-xs text-stone-800 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis"
       >
         {{ link.label }}
       </span>
     </div>
     <button
-      class="flex items-center justify-center w-4 h-4 mr-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 hover:cursor-pointer transition-colors"
+      class="flex items-center justify-center w-4 h-4 mr-2 text-stone-400 hover:text-stone-500 dark:text-stone-500 dark:hover:text-stone-400 hover:cursor-pointer transition-colors"
       type="button"
       @click="handleOpen"
       :aria-label="UI_TEXT.OPEN_LINK_BUTTON"
