@@ -47,6 +47,7 @@ import { useValidation } from '../composables/useValidation'
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
 import { generateLinkId } from '../utils/linkUtils'
+import { formatUrl } from '../utils/urlUtils'
 import ErrorMessage from './ui/ErrorMessage.vue'
 import FormField from './ui/FormField.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
@@ -142,6 +143,9 @@ function handleCancel() {
 
 function handleSave() {
   hasAttemptedSave.value = true
+
+  // Format the URL before validation and saving
+  newLink.url = formatUrl(newLink.url)
 
   // Only proceed with save if form is valid
   if (isFormValid.value) {
