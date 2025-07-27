@@ -8,10 +8,8 @@
           :key="link.id"
           class="flex flex-col items-stretch p-3 gap-2 bg-white/80 dark:bg-[#2a2a2a] rounded-lg border-1 border-[#ddd] dark:border-[#393939] cursor-move hover:bg-white/90 dark:hover:bg-[#2d2d2d] flex-shrink-0 last:mb-2"
           :class="{
-            'duration-200': props.deletingIndex !== index,
-            'duration-300': props.deletingIndex === index,
             // Tailwind sandwich animation classes
-            '!max-h-0 !pt-0 !pb-0 !mt-0 !mb-0 !overflow-hidden !opacity-0 !scale-y-0 !origin-center':
+            '!max-h-0 !pt-0 !pb-0 !mt-0 !mb-0 !overflow-hidden !opacity-0 !scale-y-0 !origin-center duration-300':
               props.deletingIndex === index,
           }"
         >
