@@ -14,7 +14,7 @@ Whether you're applying for jobs, doing research, or just managing daily tasks, 
 
 🗑️ Delete with ease: Clean up your list in seconds with a simple delete option.
 
-Whether you’re tracking job applications, organizing research sources, or just optimizing your browser workflow, Copy URL Manager is a lightweight extension built for speed, clarity, and control.
+Whether you’re tracking job applications, organizing research sources, or just optimizing your browser workflow, Ditto is a lightweight extension built for speed, clarity, and control.
 
 ## Installation
 
