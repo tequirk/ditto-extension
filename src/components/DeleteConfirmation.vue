@@ -14,7 +14,7 @@
         </div>
       </div>
       <div
-        class="flex h-12 px-3 justify-between items-center border-t border-[#ddd] dark:border-[#444]"
+        class="flex h-14 px-3 justify-between items-center border-t border-[#ddd] dark:border-[#444]"
       >
         <SecondaryButton size="sm" @click="handleCancel">
           {{ UI_TEXT.CANCEL_BUTTON }}
