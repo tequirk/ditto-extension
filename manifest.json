@@ -20,7 +20,7 @@
       }
     }
   },
-  "permissions": ["storage", "tabs", "activeTab", "scripting"],
+  "permissions": ["storage", "tabs"],
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
