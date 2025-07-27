@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { useSortable } from '@vueuse/integrations/useSortable'
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
@@ -74,6 +74,7 @@ import SecondaryButton from './ui/SecondaryButton.vue'
 interface Props {
   links: Link[]
   deletingIndex?: number
+  isAdding?: boolean
 }
 
 interface Emits {
@@ -126,6 +127,20 @@ function handleFinish() {
 function handleAddLink() {
   emit('add-link')
 }
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter' && !props.isAdding) {
+    handleFinish()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+})
 </script>
 
 <style scoped>
