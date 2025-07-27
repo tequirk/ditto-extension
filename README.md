@@ -1,4 +1,4 @@
-# [![marquee](public/marquee-title.png)](https://your-link-here.com)
+# [![marquee](public/marquee-title.png)](https://chromewebstore.google.com/detail/ditto/ppaagdcglnglpajhbhnpgpgcmnikplmn)
 
 Stay organized and save time with quick access to your most important URLs — all in one clean, sortable list.
 
