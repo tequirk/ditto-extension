@@ -38,13 +38,12 @@ export const UI_TEXT = {
   EMPTY_STATE_ALT: 'Empty state illustration',
   EDIT_LINKS_BUTTON: 'Edit Links',
   GET_STARTED_ARROW_ALT: 'Get started arrow',
-  DELETE_ICON: '🗑️',
   GET_STARTED_TEXT: 'Get started!',
 
   // Alt texts
   FAVICON_ALT: 'favicon',
   LOGO_ALT: 'Ditto Logo',
-  NEW_LINK_BUTTON: '+ New Link',
+  NEW_LINK_BUTTON: 'New Link',
   SAVE_BUTTON: 'Save',
 
   OPEN_LINK_BUTTON: 'Open Link',
@@ -54,7 +53,7 @@ export const UI_TEXT = {
 
   // Form Placeholders
   TITLE_PLACEHOLDER: 'ex. My Link',
-  URL_LABEL: 'Link URL',
+  URL_LABEL: 'URL',
   URL_PLACEHOLDER: 'ex. https://www.example.com/',
 
   // Delete Confirmation

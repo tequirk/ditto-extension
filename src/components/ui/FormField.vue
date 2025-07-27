@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="block text-xs text-[#888] dark:text-[#bbb] mb-1">
+    <label class="block text-xs text-[#888] dark:text-[#bbb] mb-1 cursor-grab">
       {{ label }}
     </label>
     <input
