@@ -5,4 +5,6 @@ export interface Link {
   isCopied?: boolean
   hasError?: boolean
   error?: string
+  hasTitleError?: boolean
+  hasUrlError?: boolean
 }
