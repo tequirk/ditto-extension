@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { UseDark } from '@vueuse/components'
 import { useDark } from '@vueuse/core'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import { onMounted, onUnmounted, ref } from 'vue'
