@@ -23,7 +23,7 @@ Find us on the
 
 ## Issues
 
-If you encounter any issues while using the application, please report them [here](https://github.com/tequirk/ditto-extension/issues).
+If you encounter any issues while using the extension, please report them [here](https://github.com/tequirk/ditto-extension/issues).
 
 ---
 
