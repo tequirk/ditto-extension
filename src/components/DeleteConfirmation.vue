@@ -21,7 +21,7 @@
         </SecondaryButton>
         <PrimaryButton
           size="sm"
-          class="!bg-red-600 hover:!bg-red-700 dark:!bg-red-600 dark:hover:!bg-red-500"
+          class="!bg-rose-600 hover:!bg-rose-700 dark:!bg-rose-600 dark:hover:!bg-rose-500"
           @click="handleDelete"
         >
           {{ UI_TEXT.DELETE_BUTTON }}

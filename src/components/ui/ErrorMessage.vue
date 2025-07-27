@@ -13,7 +13,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <p
     v-if="show && message"
-    class="text-white text-xs m-0 mb-2 bg-[#eb3d3d] px-2 py-1 rounded box-border w-full"
+    class="text-white text-xs m-0 mb-2 bg-rose-500 dark:bg-rose-600 px-2 py-1 rounded box-border w-full"
   >
     {{ message }}
   </p>
