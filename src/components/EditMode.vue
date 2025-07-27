@@ -58,6 +58,8 @@
 
 <script setup lang="ts">
 import { TrashIcon } from '@heroicons/vue/24/outline'
+import { UseDark } from '@vueuse/components'
+import { useDark } from '@vueuse/core'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import { ref } from 'vue'
 
@@ -97,7 +99,7 @@ useSortable(sortableContainer, props.links, {
   preventOnFilter: false,
   chosenClass: 'sortable-chosen',
   dragClass: 'sortable-drag',
-  ghostClass: 'sortable-ghost',
+  ghostClass: useDark().value ? 'sortable-ghost-dark' : 'sortable-ghost',
   onUpdate: (e: { oldIndex?: number; newIndex?: number }) => {
     // Create new array with reordered items
     if (e.oldIndex !== undefined && e.newIndex !== undefined) {
@@ -128,6 +130,12 @@ function handleAddLink() {
 
 <style scoped>
 .sortable-ghost {
+  opacity: 0.5;
+  outline: 2px dashed #af8c61;
+  outline-offset: -2px;
+}
+
+.sortable-ghost-dark {
   opacity: 0.5;
   filter: brightness(2);
   outline: 2px dashed #af8c61;
