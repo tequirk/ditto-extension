@@ -19,6 +19,7 @@
         v-if="store.isManaging"
         :links="store.links"
         :deleting-index="deletingIndex"
+        :is-adding="store.isAdding"
         @delete="handleDelete"
         @validate="handleValidate"
         @finish="handleFinish"
