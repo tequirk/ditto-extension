@@ -99,6 +99,8 @@ useSortable(sortableContainer, props.links, {
   preventOnFilter: false,
   chosenClass: 'sortable-chosen',
   dragClass: 'sortable-drag',
+  forceFallback: true,
+  fallbackOnBody: true,
   ghostClass: useDark().value ? 'sortable-ghost-dark' : 'sortable-ghost',
   onUpdate: (e: { oldIndex?: number; newIndex?: number }) => {
     // Create new array with reordered items
@@ -168,5 +170,12 @@ onUnmounted(() => {
 
 .grabbing {
   cursor: grabbing;
+}
+</style>
+
+<style>
+body:has(.sortable-chosen) * {
+  user-select: none;
+  cursor: grabbing !important;
 }
 </style>
