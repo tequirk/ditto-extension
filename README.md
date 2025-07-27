@@ -19,7 +19,7 @@ Whether you’re tracking job applications, organizing research sources, or just
 ## Installation
 
 Find us on the
-[Chrome Web Store](https://chromewebstore.google.com/detail/ditto/ppaagdcglnglpajhbhnpgpgcmnikplmn?authuser=3&hl=en)!
+[Chrome Web Store](https://chromewebstore.google.com/detail/ditto/ppaagdcglnglpajhbhnpgpgcmnikplmn)!
 
 ## Issues
 
