@@ -14,6 +14,11 @@ export function useValidation() {
     const label = link.label.trim()
     const url = link.url.trim()
 
+    // Check if both are empty first
+    if (!label && !url) {
+      return { error: VALIDATION_MESSAGES.BOTH_REQUIRED, isValid: false }
+    }
+
     if (!label) {
       return { error: VALIDATION_MESSAGES.TITLE_REQUIRED, isValid: false }
     }
@@ -73,9 +78,37 @@ export function useValidation() {
     if (!validation.isValid) {
       link.error = validation.error
       link.hasError = true
+
+      // Set field-specific error states based on error type
+      if (validation.error === VALIDATION_MESSAGES.BOTH_REQUIRED) {
+        link.hasTitleError = true
+        link.hasUrlError = true
+      } else if (
+        validation.error === VALIDATION_MESSAGES.TITLE_REQUIRED ||
+        validation.error === VALIDATION_MESSAGES.DUPLICATE_TITLE
+      ) {
+        link.hasTitleError = true
+        link.hasUrlError = false
+      } else if (
+        validation.error === VALIDATION_MESSAGES.URL_REQUIRED ||
+        validation.error === VALIDATION_MESSAGES.INVALID_URL_FORMAT ||
+        validation.error === VALIDATION_MESSAGES.DUPLICATE_URL
+      ) {
+        link.hasTitleError = false
+        link.hasUrlError = true
+      } else if (validation.error === VALIDATION_MESSAGES.DUPLICATE_BOTH) {
+        link.hasTitleError = true
+        link.hasUrlError = true
+      } else {
+        // Fallback: highlight both fields for unknown errors
+        link.hasTitleError = true
+        link.hasUrlError = true
+      }
     } else {
       link.error = undefined
       link.hasError = false
+      link.hasTitleError = false
+      link.hasUrlError = false
     }
   }
 

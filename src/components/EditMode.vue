@@ -20,14 +20,14 @@
               <FormField
                 v-model="link.label"
                 :label="UI_TEXT.TITLE_LABEL"
-                :has-error="link.hasError"
+                :has-error="link.hasTitleError"
                 @input="handleValidate(link, index)"
               />
 
               <FormField
                 v-model="link.url"
                 :label="UI_TEXT.URL_LABEL"
-                :has-error="link.hasError"
+                :has-error="link.hasUrlError"
                 type="url"
                 @input="handleValidate(link, index)"
               />

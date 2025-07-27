@@ -13,6 +13,7 @@ export const VALIDATION_MESSAGES = {
   INVALID_URL_FORMAT: 'URL must start with http:// or https://',
   TITLE_REQUIRED: 'A link title is required.',
   URL_REQUIRED: 'A link URL is required.',
+  BOTH_REQUIRED: 'A link title and URL are required.',
 } as const
 
 // Default error messages
