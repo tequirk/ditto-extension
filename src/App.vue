@@ -1,5 +1,5 @@
 <template>
-  <div class="font-[sans-serif] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] flex flex-col">
+  <div class="font-[Helvetica Neue] m-0 w-[360px] bg-[#e8e5e2] dark:bg-[#1e1e1e] flex flex-col">
     <!-- Header -->
     <AppHeader />
 
