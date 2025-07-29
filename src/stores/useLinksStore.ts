@@ -14,6 +14,7 @@ export const useLinksStore = defineStore('links', () => {
   const links = ref<Link[]>([])
   const isManaging = ref(false)
   const isAdding = ref(false)
+  const isDeleting = ref(false)
 
   // Use validation composable
   const { validateLink, validateLinkRealTime } = useValidation()
@@ -110,10 +111,17 @@ export const useLinksStore = defineStore('links', () => {
     clearError()
     isAdding.value = true
   }
+  function startDeleting() {
+    isDeleting.value = true
+  }
 
   function cancelAdding() {
     clearError()
     isAdding.value = false
+  }
+
+  function cancelDeleting() {
+    isDeleting.value = false
   }
 
   function validateLinkInRealTime(link: Link, index: number) {
@@ -128,6 +136,7 @@ export const useLinksStore = defineStore('links', () => {
   return {
     addLink,
     cancelAdding,
+    cancelDeleting,
     clearError,
     copyToClipboard,
     deleteLink,
@@ -138,7 +147,7 @@ export const useLinksStore = defineStore('links', () => {
     hasLinks,
     initialize,
     isAdding,
-
+    isDeleting,
     isManaging,
     // State
     links,
@@ -149,6 +158,7 @@ export const useLinksStore = defineStore('links', () => {
     saveLinks,
     startAdding,
     startEditing,
+    startDeleting,
     validateLinkInRealTime,
   }
 })

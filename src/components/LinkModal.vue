@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onUnmounted, reactive, ref, watch } from 'vue'
 
 import { useValidation } from '../composables/useValidation'
 import { UI_TEXT } from '../constants'
@@ -52,6 +52,8 @@ import ErrorMessage from './ui/ErrorMessage.vue'
 import FormField from './ui/FormField.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
 import SecondaryButton from './ui/SecondaryButton.vue'
+
+const isListenerActive = ref(false)
 
 interface Props {
   isOpen: boolean
@@ -120,23 +122,6 @@ const isFormValid = computed(() => {
   return validation.isValid
 })
 
-// Reset form when modal opens/closes
-watch(
-  () => props.isOpen,
-  async (isOpen) => {
-    if (isOpen) {
-      newLink.id = generateLinkId()
-      newLink.label = ''
-      newLink.url = await getCurrentTabUrl()
-      hasAttemptedSave.value = false // Reset validation state
-
-      // Focus the URL field after the DOM has updated
-      await nextTick()
-      labelFieldRef.value?.focus()
-    }
-  },
-)
-
 function handleCancel() {
   emit('close')
 }
@@ -159,9 +144,29 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
-onMounted(() => {
-  document.addEventListener('keydown', handleKeydown)
-})
+// Reset form when modal opens/closes
+watch(
+  () => props.isOpen,
+  async (isOpen) => {
+    if (isOpen) {
+      newLink.id = generateLinkId()
+      newLink.label = ''
+      newLink.url = await getCurrentTabUrl()
+      hasAttemptedSave.value = false // Reset validation state
+
+      // Focus the URL field after the DOM has updated
+      await nextTick()
+      labelFieldRef.value?.focus()
+    }
+    if (isOpen && !isListenerActive.value) {
+      document.addEventListener('keydown', handleKeydown)
+      isListenerActive.value = true
+    } else if (!isOpen && isListenerActive.value) {
+      document.removeEventListener('keydown', handleKeydown)
+      isListenerActive.value = false
+    }
+  },
+)
 
 onUnmounted(() => {
   document.removeEventListener('keydown', handleKeydown)

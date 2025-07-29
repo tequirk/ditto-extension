@@ -74,6 +74,7 @@ interface Props {
   links: Link[]
   deletingIndex?: number
   isAdding?: boolean
+  isDeleting?: boolean
 }
 
 interface Emits {
@@ -130,7 +131,7 @@ function handleAddLink() {
 }
 
 function handleKeydown(event: KeyboardEvent) {
-  if (event.key === 'Enter' && !props.isAdding) {
+  if (event.key === 'Enter' && !props.isAdding && !props.isDeleting) {
     handleFinish()
   }
 }
