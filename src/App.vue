@@ -20,6 +20,7 @@
         :links="store.links"
         :deleting-index="deletingIndex"
         :is-adding="store.isAdding"
+        :is-deleting="store.isDeleting"
         @delete="handleDelete"
         @validate="handleValidate"
         @finish="handleFinish"
@@ -42,7 +43,7 @@
 
     <!-- Delete Confirmation Modal -->
     <DeleteConfirmation
-      :is-open="showDeleteConfirmation"
+      :is-open="store.isDeleting"
       :link-title="linkToDelete?.label"
       @cancel="handleCancelDelete"
       @confirm="handleConfirmDelete"
@@ -67,7 +68,6 @@ import type { Link } from './types'
 const store = useLinksStore()
 
 // Delete confirmation state
-const showDeleteConfirmation = ref(false)
 const linkToDelete = ref<Link | null>(null)
 const linkIndexToDelete = ref<number>(-1)
 const deletingIndex = ref<number>(-1)
@@ -95,14 +95,14 @@ function handleDelete(index: number) {
   // Show confirmation dialog instead of directly deleting
   linkToDelete.value = store.links[index]
   linkIndexToDelete.value = index
-  showDeleteConfirmation.value = true
+  store.startDeleting()
 }
 
 function handleCancelDelete() {
-  showDeleteConfirmation.value = false
   linkToDelete.value = null
   linkIndexToDelete.value = -1
   deletingIndex.value = -1
+  store.cancelDeleting()
 }
 
 function handleConfirmDelete() {
@@ -112,7 +112,6 @@ function handleConfirmDelete() {
     if (isLastItem) {
       // For the last item, delete immediately - no animation
       store.deleteLink(linkIndexToDelete.value)
-      showDeleteConfirmation.value = false
       linkToDelete.value = null
       linkIndexToDelete.value = -1
       deletingIndex.value = -1
@@ -121,7 +120,6 @@ function handleConfirmDelete() {
       deletingIndex.value = linkIndexToDelete.value
 
       // Close the modal immediately
-      showDeleteConfirmation.value = false
       linkToDelete.value = null
 
       // Wait for animation to complete, then delete
@@ -131,6 +129,7 @@ function handleConfirmDelete() {
         linkIndexToDelete.value = -1
       }, 300) // Match the animation duration
     }
+    store.cancelDeleting()
   }
 }
 
