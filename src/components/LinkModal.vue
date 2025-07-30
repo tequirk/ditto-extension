@@ -90,6 +90,15 @@ function getCurrentTabUrl(): Promise<string> {
   })
 }
 
+function getCurrentTabTitle(): Promise<string> {
+  const tabsApi = typeof browser !== 'undefined' ? browser.tabs : chrome.tabs
+  return new Promise((resolve) => {
+    tabsApi.query({ active: true, currentWindow: true }, (tabs: browser.tabs.Tab[]) => {
+      const tab = tabs[0]
+      resolve(tab?.title || '')
+    })
+  })
+}
 const newLink = reactive<Link>({
   id: '',
   label: '',
@@ -150,7 +159,7 @@ watch(
   async (isOpen) => {
     if (isOpen) {
       newLink.id = generateLinkId()
-      newLink.label = ''
+      newLink.label = await getCurrentTabTitle()
       newLink.url = await getCurrentTabUrl()
       hasAttemptedSave.value = false // Reset validation state
 
