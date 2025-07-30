@@ -21,6 +21,9 @@
       <TextButton @click="handleEdit">
         {{ UI_TEXT.EDIT_LINKS_BUTTON }}
       </TextButton>
+      <PrimaryButton @click="handleAddLink">
+        {{ UI_TEXT.NEW_LINK_BUTTON }}
+      </PrimaryButton>
     </div>
   </div>
 </template>
@@ -29,6 +32,7 @@
 import { UI_TEXT } from '../constants'
 import type { Link } from '../types'
 import LinkItem from './LinkItem.vue'
+import PrimaryButton from './ui/PrimaryButton.vue'
 import TextButton from './ui/TextButton.vue'
 
 interface Props {
@@ -39,6 +43,7 @@ interface Emits {
   (e: 'copy', link: Link): void
   (e: 'edit'): void
   (e: 'reorder', newOrder: Link[]): void
+   (e: 'add-link'): void
 }
 
 defineProps<Props>()
@@ -50,5 +55,9 @@ function handleCopy(link: Link) {
 
 function handleEdit() {
   emit('edit')
+}
+
+function handleAddLink() {
+  emit('add-link')
 }
 </script>
