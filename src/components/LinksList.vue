@@ -27,7 +27,7 @@
     >
       <button
         v-if="showScrollIndicator"
-        class="absolute left-1/2 transform -translate-x-1/2 bottom-12 z-10 w-8 h-8 bg-white/90 dark:bg-[#2b2b2b]/90 border border-[#ddd] dark:border-[#393939] rounded-full shadow-lg backdrop-blur-sm hover:bg-white dark:hover:bg-[#2b2b2b] transition-all duration-200 flex items-center justify-center text-stone-600 dark:text-stone-300 hover:text-stone-800 dark:hover:text-white hover:scale-105"
+        class="absolute left-1/2 transform -translate-x-1/2 bottom-12 z-10 w-8 h-8 bg-white/90 dark:bg-[#2b2b2b]/90 border border-[#ddd] dark:border-[#393939] rounded-full shadow-lg backdrop-blur-sm hover:bg-white dark:hover:bg-[#2b2b2b] transition-all duration-200 flex items-center justify-center text-stone-600 dark:text-stone-300 hover:text-stone-800 dark:hover:text-white hover:scale-105 cursor-pointer"
         @click="handleScrollClick"
         :aria-label="isAtBottom ? 'Scroll to top' : 'Scroll to bottom'"
       >
