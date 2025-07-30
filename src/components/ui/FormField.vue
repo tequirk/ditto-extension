@@ -3,17 +3,45 @@
     <label class="block text-xs pl-1.5 text-[#888] dark:text-[#bbb] mb-1 cursor-grab">
       {{ label }}
     </label>
-    <input
-      ref="inputRef"
-      :value="modelValue"
-      :type="type"
-      :placeholder="placeholder"
-      class="ignore-drag w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] bg-[#edeceb] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)]"
-      :class="{ 'border-rose-500 dark:border-rose-600 bg-rose-600/10': hasError }"
-      @input="handleInput"
-      @paste="handlePaste"
-      @blur="handleBlur"
-    />
+    <div class="relative group">
+      <input
+        ref="inputRef"
+        :value="modelValue"
+        :type="type"
+        :placeholder="placeholder"
+        class="ignore-drag w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] bg-[#edeceb] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)]"
+        :class="{
+          'border-rose-500 dark:border-rose-600 bg-rose-600/10': hasError,
+          'pr-6': modelValue.length > 0,
+        }"
+        @input="handleInput"
+        @paste="handlePaste"
+        @blur="handleBlur"
+      />
+      <button
+        v-if="modelValue.length > 0"
+        type="button"
+        class="absolute right-1.5 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center text-[#888] dark:text-[#bbb] hover:text-[#666] dark:hover:text-[#ddd] transition-colors ignore-drag cursor-pointer opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100"
+        @click="clearField"
+        @mousedown.prevent
+        tabindex="-1"
+      >
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L9 9M9 1L1 9"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -52,6 +80,13 @@ function focus() {
 }
 
 defineExpose({ focus })
+
+function clearField() {
+  emit('update:modelValue', '')
+  // Emit a synthetic input event to trigger validation in parent
+  emit('input', new InputEvent('input'))
+  inputRef.value?.focus()
+}
 
 function handleInput(event: Event) {
   const target = event.target as HTMLInputElement
