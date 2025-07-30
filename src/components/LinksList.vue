@@ -18,12 +18,12 @@
     <div
       class="flex-shrink-0 bg-[#e8e5e2] dark:bg-[#1e1e1e] backdrop-blur-[10px] p-3 flex justify-center items-center gap-3 min-h-7 dark:text-white"
     >
-      <TextButton @click="handleEdit">
-        {{ UI_TEXT.EDIT_LINKS_BUTTON }}
-      </TextButton>
       <PrimaryButton @click="handleAddLink">
         {{ UI_TEXT.NEW_LINK_BUTTON }}
       </PrimaryButton>
+      <TextButton @click="handleEdit">
+        {{ UI_TEXT.EDIT_LINKS_BUTTON }}
+      </TextButton>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ interface Emits {
   (e: 'copy', link: Link): void
   (e: 'edit'): void
   (e: 'reorder', newOrder: Link[]): void
-   (e: 'add-link'): void
+  (e: 'add-link'): void
 }
 
 defineProps<Props>()
