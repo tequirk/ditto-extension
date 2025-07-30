@@ -3,7 +3,7 @@
     <label class="block text-xs pl-1.5 text-[#888] dark:text-[#bbb] mb-1 cursor-grab">
       {{ label }}
     </label>
-    <div class="relative">
+    <div class="relative group">
       <input
         ref="inputRef"
         :value="modelValue"
@@ -21,9 +21,10 @@
       <button
         v-if="modelValue.length > 0"
         type="button"
-        class="absolute right-1.5 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center text-[#888] dark:text-[#bbb] hover:text-[#666] dark:hover:text-[#ddd] transition-colors ignore-drag cursor-pointer"
+        class="absolute right-1.5 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center text-[#888] dark:text-[#bbb] hover:text-[#666] dark:hover:text-[#ddd] transition-colors ignore-drag cursor-pointer opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100"
         @click="clearField"
         @mousedown.prevent
+        tabindex="-1"
       >
         <svg
           width="10"
@@ -82,6 +83,8 @@ defineExpose({ focus })
 
 function clearField() {
   emit('update:modelValue', '')
+  // Emit a synthetic input event to trigger validation in parent
+  emit('input', new InputEvent('input'))
   inputRef.value?.focus()
 }
 
