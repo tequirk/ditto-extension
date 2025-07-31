@@ -2,7 +2,6 @@
 import tailwindcss from "file:///Users/nate/Desktop/Dev/ditto-extension/node_modules/@tailwindcss/vite/dist/index.mjs";
 import vue from "file:///Users/nate/Desktop/Dev/ditto-extension/node_modules/@vitejs/plugin-vue/dist/index.mjs";
 import { defineConfig } from "file:///Users/nate/Desktop/Dev/ditto-extension/node_modules/vite/dist/node/index.js";
-
 // plugins/copyManifest.ts
 import * as fs from "fs";
 import * as path from "path";

@@ -12,6 +12,7 @@
         @copy="handleCopy"
         @edit="handleEdit"
         @reorder="handleReorder"
+        @add-link="handleAddLink"
       />
 
       <!-- Edit Mode / Empty State -->
