@@ -1,6 +1,6 @@
 {
   "name": "ditto",
-  "version": "1.2.1",
+  "version": "1.2.0",
   "scripts": {
     "dev": "web-ext run --config web-ext.config.mjs & nodemon -e css,html,json,js,ts,vue --watch src/ --exec \"npm run build-lite\"",
     "build-lite": "vite build",
