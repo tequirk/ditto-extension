@@ -9,7 +9,7 @@
         :value="modelValue"
         :type="type"
         :placeholder="placeholder"
-        class="ignore-drag w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] bg-[#edeceb] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)]"
+        class="ignore-drag w-full px-1.5 py-1 border border-gray-300 dark:border-[#555] bg-[#edeceb] dark:bg-[#1f1f1f] dark:text-white rounded text-[13px] box-border focus:outline-none focus:border-[#d2b38c] focus:shadow-[0_0_0_2px_rgba(210,179,140,0.2)] truncate overflow-hidden whitespace-nowrap"
         :class="{
           'border-rose-500 dark:border-rose-600 bg-rose-600/10': hasError,
           'pr-6': modelValue.length > 0,
