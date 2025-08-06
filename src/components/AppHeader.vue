@@ -24,7 +24,7 @@ import { UI_TEXT } from '../constants'
       <h1 class="text-2xl font-bold text-stone-800 dark:text-white">
         {{ UI_TEXT.APP_NAME }}
       </h1>
-      <p class="text-stone-500 dark:text-stone-400">
+      <p class="text-stone-500 text-xs dark:text-stone-400">
         {{ UI_TEXT.APP_TAGLINE }}
         <a
           :href="UI_TEXT.BUY_COFFEE_URL"
